@@ -1,4 +1,4 @@
-# Ditter by illadelph
+# 'D' by illadelph
 ### Members:
 Evan Chan. Endrit Idrizi, Leon Huang, and Marco Quintero
 
@@ -8,7 +8,7 @@ Evan Chan. Endrit Idrizi, Leon Huang, and Marco Quintero
 **SSH**: In your computer's ```Terminal/Powershell/Command Prompt```, run the command ```$   git clone git@github.com:evann51/illadelph__evanc107_endriti2_leonh15_marcoq4.git``` in the directory you want this file to be in.
 
 ## Launch Codes
-**For Spinning Ditter Up on Local Host**  
+**For Spinning 'D' Up on Local Host**  
 
 1. **Making a Virtual Environment** (skip to Step 2 if a virtual environment with the required modules is already made and can be used)  
   a. In ```Terminal/Powershell/Command Prompt```, run ```$ python3 -m venv [name]``` or ```$ py -m venv [name]``` on Windows.  
