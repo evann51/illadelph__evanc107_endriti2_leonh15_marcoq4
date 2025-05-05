@@ -1,5 +1,3 @@
-# illadelph__evanc107_endriti2_leonh15_marcoq4
-
 # Ditter by illadelph
 ### Members:
 Evan Chan. Endrit Idrizi, Leon Huang, and Marco Quintero
