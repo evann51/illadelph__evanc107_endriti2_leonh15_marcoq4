@@ -1,7 +1,11 @@
-# illadelph__evanc107_endriti2_leonh15_marcoq4
+## Halflife by illadelph
 
-## Roster
+# Roster
 * Evan Chan
 * Endrit Idrizi
 * Leon Huang
 * Marco Quintero
+
+# Description
+Our project is in progress.
+
