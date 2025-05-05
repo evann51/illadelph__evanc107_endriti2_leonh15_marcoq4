@@ -3,6 +3,7 @@
 Evan Chan. Endrit Idrizi, Leon Huang, and Marco Quintero
 
 ## Project Description
+Our project is a recreation of the popular social media website X. D is a forum for Devos to post their thoughts and ideas and receive quick replies from a Gemini API call. 
 
 ## Install Guide
 **SSH**: In your computer's ```Terminal/Powershell/Command Prompt```, run the command ```$   git clone git@github.com:evann51/illadelph__evanc107_endriti2_leonh15_marcoq4.git``` in the directory you want this file to be in.
