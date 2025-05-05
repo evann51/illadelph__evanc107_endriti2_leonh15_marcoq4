@@ -1,11 +1,11 @@
-## Halflife by illadelph
+# Halflife by illadelph
 
-# Roster
+## Roster
 * Evan Chan
 * Endrit Idrizi
 * Leon Huang
 * Marco Quintero
 
-# Description
+## Description
 Our project is in progress.
 
