@@ -16,8 +16,9 @@ Evan Chan. Endrit Idrizi, Leon Huang, and Marco Quintero
   c. Install the Flask module by navigating to this project's directory and running ```$ pip install -r requirements.txt```.
   d. Deactivate the virtual environment with ```$ deactivate```.
 3. **Running the Web App on Local Host**  
-  a. Activate the virtual environment.  
-  b. Run the flask app using ```$ python3 app/__init__.py``` or ```$ py app\__init__.py``` for Windows.  
+  a. Activate the virtual environment.
+  b. Move into the app folder with ```$ cd app```.
+  b. Run the flask app using ```$ python3 __init__.py``` or ```$ py __init__.py``` for Windows.  
   c. Enter ```http://127.0.0.1:5000``` in your web browser to access the web app.
 
 ### Feature Spotlight
