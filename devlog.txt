@@ -1,0 +1,20 @@
+evanC, endritI, leonH, marcoQ -- 2025-04-30 11:20
+- Created and linked submodule
+- Uploaded team flag
+
+evanC -- 2025-05-05 11:33
+- Logo added
+
+endritI -- 2025-05-06 11:35
+- Initial file structure and templates created
+
+evanC, endritI, leonH, marcoQ -- 2025-05-07 02:00
+- First design doc completed and uploaded
+
+evanC, endritI, leonH, marcoQ -- 2025-05-07 10:00
+- Figuring out node and its workings
+
+endritI, leonH, marcoQ -- 2025-05-08 11:40
+- Updated template for base (homepage)
+- Uploaded design doc to repo
+- Updated README.md
