@@ -48,18 +48,22 @@
 
         /* Light Mode */
         body.light-mode {
-            background-color: #ffffff;
+            background-color: #F2F0EF;
             color: #000000;
         }
 
         body.light-mode textarea {
-            background-color: #ffffff;
+            background-color: #F2F0EF;
             color: #000000;
-            border: 1px solid #ccc;            
+            border: 1px solid #ccc;
+        }
+
+        img.light-mode {
+            filter: invert(1);
         }
 
         .navbar.light-mode, .footer.light-mode {
-            background-color: #c6c9cb;
+            background-color: #ffffff;
             color: #000000;
         }
 
@@ -82,7 +86,7 @@
         }
 
         .navbar.dark-mode, .footer.dark-mode {
-            background-color: #1f1f1f;
+            background-color: #000000;
             color: #ffffff;
         }
 
@@ -96,6 +100,10 @@
 
         .footer.dark-mode a {
             color: #ffffff;
+        }
+
+        img.dark-mode {
+            filter: invert(0);
         }
 
         body.dark-mode input {
@@ -128,11 +136,11 @@
     <!-- Navigation Bar -->
     <nav class="navbar bg-white shadow">
         <div class="container mx-auto px-4 py-4 flex justify-between items-center">
-            <a href="{{ url_for('home') }}" class="text-2xl font-bold"> <img url="../static/logo.jpg"></img> </a>
+            <a href="{{ url_for('home') }}" class="text-2xl font-bold"> <img src="../static/logo.jpg" width="40" height="40"> </a>
             <ul class="flex space-x-6 items-center">
                 <li><a href="#" class="text-gray-600 hover:text-gray-800"> Search </a></li>
                 <li><a href="{{ url_for('allHolidays') }}" class="text-gray-600 hover:text-gray-800"> Notifications </a></li>
-                <li><a href="{{ url_for('community_threads') }}" class="text-gray-600 hover:text-gray-800"> Direct Merssages </a></li>
+                <li><a href="{{ url_for('community_threads') }}" class="text-gray-600 hover:text-gray-800"> Direct Messages </a></li>
                 <li>
                     <!-- Mode Switcher -->
                     <div class="relative">
@@ -175,11 +183,11 @@
         // Function to set the user mode
         function setMode(mode) {
             // Remove existing mode classes
-            document.body.classList.remove('light-mode', 'dark-mode', 'topher-mode', 'custom-mode');
+            document.body.classList.remove('light-mode', 'dark-mode');
             const navbar = document.querySelector('.navbar');
             const footer = document.querySelector('.footer');
-            navbar.classList.remove('light-mode', 'dark-mode', 'topher-mode', 'custom-mode');
-            footer.classList.remove('light-mode', 'dark-mode', 'topher-mode', 'custom-mode');
+            navbar.classList.remove('light-mode', 'dark-mode');
+            footer.classList.remove('light-mode', 'dark-mode');
 
             // Apply new mode
             if (mode === 'custom') {
@@ -218,46 +226,10 @@
             document.getElementById('modeSwitcherMenu').classList.add('hidden');
         }
 
-        // Function to apply custom theme
-        function applyCustomTheme() {
-            const backgroundColor = document.getElementById("background-color").value;
-            const textColor = document.getElementById("text-color").value;
-            const accentColor = document.getElementById("accent-color").value;
-
-            // Apply the custom colors to the document
-            document.documentElement.style.setProperty('--bg-color', backgroundColor);
-            document.documentElement.style.setProperty('--text-color', textColor);
-            document.documentElement.style.setProperty('--accent-color', accentColor);
-
-            // Add 'custom-mode' class to body, navbar, and footer
-            document.body.classList.add('custom-mode');
-            document.querySelector('.navbar').classList.add('custom-mode');
-            document.querySelector('.footer').classList.add('custom-mode');
-
-            // Save the custom theme to localStorage
-            const theme = { bgColor: backgroundColor, textColor: textColor, accentColor: accentColor };
-            localStorage.setItem('customTheme', JSON.stringify(theme));
-
-            // Save the mode as 'custom' in localStorage
-            localStorage.setItem('mode', 'custom');
-
-            // Highlight the custom mode in the dropdown menu
-            const modeLinks = document.querySelectorAll('#modeSwitcherMenu a');
-            modeLinks.forEach(link => link.classList.remove('bg-blue-500', 'text-white')); // Remove highlight
-            const customModeLink = document.querySelector(`#modeSwitcherMenu a[onclick="setMode('custom')"]`);
-            if (customModeLink) {
-                customModeLink.classList.add('bg-blue-500', 'text-white'); // Add highlight
-            }
-
-            // Close the mode switcher menu
-            document.getElementById('modeSwitcherMenu').classList.add('hidden');
-
-            alert("Custom theme applied successfully!");
-        }
 
         // Function to load the saved mode on page load
         function loadMode() {
-            const savedMode = localStorage.getItem('mode') || 'topher'; // 'topher' is default
+            const savedMode = localStorage.getItem('mode') || 'dark'; // 'dark' is default
             setMode(savedMode);
         }
 
@@ -265,7 +237,7 @@
         document.addEventListener('DOMContentLoaded', function() {
             loadMode();
 
-            // Toggle dropdown menu 
+            // Toggle dropdown menu
             const modeSwitcherBtn = document.getElementById('modeSwitcherBtn');
             const modeSwitcherMenu = document.getElementById('modeSwitcherMenu');
 
