@@ -19,3 +19,9 @@ endritI, leonH, marcoQ -- 2025-05-08 11:35
 - Updated template for base (homepage)
 - Uploaded design doc to repo
 - Updated README.md
+
+evanC -- 2025-05-11 22:57
+- Working node.js app that renders templates 
+- Added express and ejs to module list
+- Converted html template to ejs template
+- Organized paths and directory to fit node format
