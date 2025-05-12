@@ -25,3 +25,8 @@ evanC -- 2025-05-11 22:57
 - Added express and ejs to module list
 - Converted html template to ejs template
 - Organized paths and directory to fit node format
+
+evanC, endritI, leonH -- 2025-05-12 11:45
+- Bug fixing for Node 
+- Converted navbar to sidebar
+- Fixed log inverting for dark and light mode
