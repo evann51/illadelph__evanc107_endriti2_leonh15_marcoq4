@@ -30,3 +30,7 @@ evanC, endritI, leonH -- 2025-05-12 11:45
 - Bug fixing for Node 
 - Converted navbar to sidebar
 - Fixed log inverting for dark and light mode
+
+endritI, leonH -- 2025-05-13 11:23
+- Fixed button colors and hover colors  
+- Fixed logo image path
