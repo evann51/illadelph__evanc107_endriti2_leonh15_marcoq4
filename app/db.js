@@ -28,7 +28,8 @@ function addUser(username, password){
     num = column;
     console.log("All columns:" + num);
   });
-  db.run("INSERT INTO userData (userID, username, password) VALUES (?, ?, ?)", (Object.keys(num).length, username, password));
+  console.log("Length of num:", Object.keys(num).length)
+  db.run("INSERT INTO userData (userID, username, password) VALUES (?, ?, ?)", [Object.keys(num).length, username, password]);
   db.close()
 };
 
@@ -50,5 +51,6 @@ function allUserData(){
 }
 
 createTable();
-addUser("Tyson", "Brandt");
-allUserData()
+//addUser("Tyson", "Brandt");
+//addUser("Israel", "Armani")
+allUserData();
