@@ -138,7 +138,6 @@
     {% endblock %}
 </head>
 <body>
-    <!-- Navigation Bar -->
     <!-- Sidebar Navigation -->
     <nav class="navbar fixed left-0 top-0 h-full w-64 bg-white dark:bg-black shadow flex flex-col gap-4 p-6">
         <div>
@@ -146,7 +145,7 @@
                 <img src="/images/logo.jpg" width="40" height="40">
             </a>
             <ul class="space-y-4">
-                <li><a href="#" class="text-gray-600 dark:text-white hover:text-gray-800">Search</a></li>
+                <li><a href="#" class="text-gray-600 dark:text-white hover:text-gray-800 ">Search</a></li>
                 <li><a href="{{ url_for('allHolidays') }}" class="text-gray-600 dark:text-white hover:text-gray-800">Notifications</a></li>
                 <li><a href="{{ url_for('community_threads') }}" class="text-gray-600 dark:text-white hover:text-gray-800">Direct Messages</a></li>
             </ul>
@@ -167,7 +166,7 @@
                 <a href="{{ url_for('logout') }}" class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 block text-center">Logout</a>
             {% else %}
                 <a href="{{ url_for('login') }}" class="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 block text-center">Login</a>
-                <a href="{{ url_for('register') }}" class="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 block text-center">Sign Up</a>
+                <a href="{{ url_for('register') }}" class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 block text-center">Register</a>
             {% endif %}
         </div>
     </nav>
