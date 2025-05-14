@@ -166,7 +166,7 @@
                 <a href="{{ url_for('logout') }}" class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 block text-center">Logout</a>
             {% else %}
                 <a href="{{ url_for('login') }}" class="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 block text-center">Login</a>
-                <a href="/register" class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 block text-center">Register</a>
+                <a href="{{ url_for('register') }}" class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 block text-center">Register</a>
             {% endif %}
         </div>
     </nav>
