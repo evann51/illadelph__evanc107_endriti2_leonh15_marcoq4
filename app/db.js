@@ -7,12 +7,13 @@ function createTable(){
     } else {
       console.log('Connected to the database');
     }
-    db.run("CREATE TABLE IF NOT EXISTS userData (userID INTEGER PRIMARY KEY, username TEXT UNIQUE NOT NULL, password TEXT NOT NULL)");
+    db.run("CREATE TABLE IF NOT EXISTS userData (userID INTEGER PRIMARY KEY, username TEXT NOT NULL, userHandle UNIQUE TEXT NOT NULL, password TEXT NOT NULL, profilePicture TEXT, profileBanner TEXT)");
+    db.run("CREATE TABLE IF NOT EXISTS dweetData (dweetID INTEGER PRIMARY KEY, post TEXT NOT NULL, media0 TEXT, media1 TEXT, media2 TEXT, media3 TEXT, poster INTEGER NOT NULL, postRepliedTo INTEGER)")
     db.close();
   });
 };
 
-function addUser(username, password){
+function addUser(username, userHandle, password, profilePicture, profileBanner){
   const db = new sqlite3.Database('./dwitter.db', (err) => {
     if (err) {
       console.error('Error connecting to the database:', err.message);
@@ -41,6 +42,17 @@ function addUser(username, password){
   });
 };
 
+function createPost(post, medias, poster, postRepliedTo){
+  const db = new sqlite3.Database('./dwitter.db', (err) => {
+    if (err) {
+      console.error('Error connecting to the database:', err.message);
+    } else {
+      console.log('Connected to the database');
+    }
+
+  });
+}
+
 function allUserData(){
   const db = new sqlite3.Database('./dwitter.db', (err) => {
     if (err) {
@@ -58,6 +70,7 @@ function allUserData(){
     db.close();
   });
 }
+
 
 createTable();
 //addUser("Tyson", "Brandt");
