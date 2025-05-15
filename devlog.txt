@@ -34,3 +34,6 @@ evanC, endritI, leonH -- 2025-05-12 11:45
 endritI, leonH -- 2025-05-13 11:23
 - Fixed button colors and hover colors  
 - Fixed logo image path
+
+endritI, leonH -- 2025-05-15 11:45 
+- Trying to figure out node layouts
