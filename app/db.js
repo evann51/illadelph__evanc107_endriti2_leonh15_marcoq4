@@ -20,19 +20,23 @@ function addUser(username, password){
       console.log('Connected to the database');
     }
   });
-  var num = 0;
+  let num = 0;
+
   db.all("SELECT userID FROM userData;", (err, column) => {
     if (err) {
     console.error(err.message);
     }
-    num = Object.keys(column).length;
-    console.log("All columns:" + Object.keys(column).length);
-  });
-  db.run("INSERT INTO userData (userID, username, password) VALUES (?, ?, ?)", [Object.keys(num).length, username, password], function(err) {
-    if (err) {
-      return console.error(err.message);
+    if (column != null) {
+      num = Object.keys(column).length;
     }
-    console.log("A row has been inserted with rowid ${this.lastID}");
+    //console.log("Column: " + Object.keys(column).length);
+    //console.log("Variable num: " + num);
+    db.run("INSERT INTO userData (userID, username, password) VALUES (?, ?, ?)", [num, username, password], function(err) {
+      if (err) {
+        return console.error(err.message);
+      }
+      console.log("A row has been inserted with rowid ${this.lastID}");
+    });
   });
   db.close()
 };
@@ -52,9 +56,10 @@ function allUserData(){
     let allRows = rows;
     console.log("All rows:", allRows)
   });
+  db.close()
 }
 
 createTable();
 addUser("Tyson", "Brandt");
-//addUser("Israel", "Armani")
-allUserData();
+addUser("Israel", "Armani")
+//allUserData();
