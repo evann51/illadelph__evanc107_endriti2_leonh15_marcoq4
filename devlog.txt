@@ -42,3 +42,7 @@ endritI, leonH -- 2025-05-15 11:42
 - Finalized home page and register page
 - Scrapped node layouts
 - Starting logout, login, profile
+
+evanC, leonH -- 2025--05-16 11:44
+- Create new droplet and set up nginx
+- Errors from pm2 on old droplets
