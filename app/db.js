@@ -100,6 +100,23 @@ function allUserData(){
   });
 }
 
+function getUsername(ID){
+  const db = new sqlite3.Database('./dwitter.db', (err) => {
+    if (err) {
+      console.error('Error connecting to the database:', err.message);
+    } else {
+      console.log('Connected to the database');
+    }
+    db.all(`SELECT username FROM userData where userID = ${ID}`, (err, username) => {
+      if (err) {
+        console.error(err.message);
+      } else{
+        console.log("SELECT username FROM userData where userID = ${ID}");
+        console.log("Username for ID " + ID + ": " + JSON.stringify(username[0].username));
+      }
+    })
+  });
+}
 function allDweetData(){
   const db = new sqlite3.Database('./dwitter.db', (err) => {
     if (err) {
@@ -119,13 +136,14 @@ function allDweetData(){
 }
 
 function testerMethod(){
-  createTable();
+  //createTable();
   //addUser("Tyson", "spark_of_humanity", "Brandt", "tysonbrandt.jpg", "");
   //addUser("Elli", "dawarden", "Verdandi", "krow.png", "timeaftertime.jpg");
   //addPost("New phone. who dis?", null, null, null, null, 0, null);
   //addPost("This isn't a new phone, idiot.", "facepalm.gif", null, null, null, 1, 0);
-  allUserData();
-  allDweetData();
+  //allUserData();
+  //allDweetData();
+  getUsername(0);
 }
 
 testerMethod();
