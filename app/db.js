@@ -81,7 +81,7 @@ function addPost(post, media0, media1, media2, media3, poster, postRepliedTo){
   });
 }
 
-//Accessor Methods
+//Accessor Methods for User Data
 function allUserData(){
   const db = new sqlite3.Database('./dwitter.db', (err) => {
     if (err) {
@@ -107,16 +107,74 @@ function getUsername(ID){
     } else {
       console.log('Connected to the database');
     }
-    db.all(`SELECT username FROM userData where userID = ${ID}`, (err, username) => {
+    db.all(`SELECT username FROM userData where userID = ${ID}`, (err, user) => {
       if (err) {
         console.error(err.message);
       } else{
-        console.log("SELECT username FROM userData where userID = ${ID}");
         console.log("Username for ID " + ID + ": " + JSON.stringify(username[0].username));
+        return(JSON.stringify(username[0].username);
       }
     })
   });
 }
+
+function getUserHandle(ID){
+  const db = new sqlite3.Database('./dwitter.db', (err) => {
+    if (err) {
+      console.error('Error connecting to the database:', err.message);
+    } else {
+      console.log('Connected to the database');
+    }
+    db.all(`SELECT username FROM userData where userID = ${ID}`, (err, user) => {
+      if (err) {
+        console.error(err.message);
+      } else{
+        console.log("Username for ID " + ID + ": " + JSON.stringify(username[0].userHandle));
+        return(JSON.stringify(username[0].userHandle);
+      }
+    })
+  });
+}
+
+function getPassword(ID){
+  const db = new sqlite3.Database('./dwitter.db', (err) => {
+    if (err) {
+      console.error('Error connecting to the database:', err.message);
+    } else {
+      console.log('Connected to the database');
+    }
+    db.all(`SELECT username FROM userData where userID = ${ID}`, (err, user) => {
+      if (err) {
+        console.error(err.message);
+      } else{
+        console.log(`SELECT username FROM userData where userID = ${ID}`);
+        console.log("Username for ID " + ID + ": " + JSON.stringify(user[0].password));
+        return(JSON.stringify(username[0]password);
+      }
+    })
+  });
+}
+
+function getPassword(ID){
+  const db = new sqlite3.Database('./dwitter.db', (err) => {
+    if (err) {
+      console.error('Error connecting to the database:', err.message);
+    } else {
+      console.log('Connected to the database');
+    }
+    db.all(`SELECT username FROM userData where userID = ${ID}`, (err, user) => {
+      if (err) {
+        console.error(err.message);
+      } else{
+        console.log(`SELECT username FROM userData where userID = ${ID}``);
+        console.log("Username for ID " + ID + ": " + JSON.stringify(user[0].password));
+        return(JSON.stringify(username[0]password);
+      }
+    })
+  });
+}
+
+//Accessor Methods for Dweet Data
 function allDweetData(){
   const db = new sqlite3.Database('./dwitter.db', (err) => {
     if (err) {
