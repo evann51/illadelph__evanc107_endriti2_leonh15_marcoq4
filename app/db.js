@@ -1,5 +1,6 @@
 const sqlite3 = require('sqlite3').verbose();
 
+//Mutator Methods
 function createTable(){
   const db = new sqlite3.Database('./dwitter.db', (err) => {
     if (err) {
@@ -80,6 +81,7 @@ function addPost(post, media0, media1, media2, media3, poster, postRepliedTo){
   });
 }
 
+//Accessor Methods
 function allUserData(){
   const db = new sqlite3.Database('./dwitter.db', (err) => {
     if (err) {
@@ -92,7 +94,25 @@ function allUserData(){
       console.error(err.message);
       }
       let allRows = rows;
-      console.log("All rows:", allRows)
+      console.log("User Data:", allRows);
+    });
+    db.close();
+  });
+}
+
+function allDweetData(){
+  const db = new sqlite3.Database('./dwitter.db', (err) => {
+    if (err) {
+      console.error('Error connecting to the database:', err.message);
+    } else {
+      console.log('Connected to the database');
+    }
+    db.all("SELECT * FROM dweetData", (err, rows) => {
+      if (err) {
+      console.error(err.message);
+      }
+      let allRows = rows;
+      console.log("Post Data:", allRows);
     });
     db.close();
   });
@@ -101,10 +121,11 @@ function allUserData(){
 function testerMethod(){
   createTable();
   //addUser("Tyson", "spark_of_humanity", "Brandt", "tysonbrandt.jpg", "");
-  //addUser("Elli", "dawarden", "Gandr", "krow.png", "timeaftertime.jpg");
+  //addUser("Elli", "dawarden", "Verdandi", "krow.png", "timeaftertime.jpg");
   //addPost("New phone. who dis?", null, null, null, null, 0, null);
   //addPost("This isn't a new phone, idiot.", "facepalm.gif", null, null, null, 1, 0);
   allUserData();
+  allDweetData();
 }
 
 testerMethod();
