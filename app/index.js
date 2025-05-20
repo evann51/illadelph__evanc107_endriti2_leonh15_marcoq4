@@ -24,6 +24,12 @@ app.get('/register', (req, res) => {
   res.render('register', data);
 });
 
+app.get('/login', (req, res) => {
+  const data = { //change later to whatecver data we need
+  };
+  res.render('login', data);
+});
+
 app.get('/inbox', (req, res) => {
   const data = {
 
