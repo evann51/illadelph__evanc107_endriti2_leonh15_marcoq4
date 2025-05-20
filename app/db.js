@@ -45,12 +45,27 @@ function addUser(username, userHandle, password, profilePicture, profileBanner){
         if (err) {
           return console.error(err.message);
         }
-        console.log("A row has been inserted with rowid ${this.lastID}");
       });
     });
     db.close();
   });
 };
+
+function changeUsername(ID, newUsername) {
+  const db = new sqlite3.Database('./dwitter.db', (err) => {
+    if (err) {
+      console.error('Error connecting to the database:', err.message);
+    } else {
+      console.log('Connected to the database');
+    }
+    db.run("UPDATE userData SET username = (?) WHERE userID = (?)", [newUsername], [ID], function(err){
+      if (err) {
+        return console.error(err.message);
+      }
+      console.log(`Username iwth user ID ${ID} has been changed`);
+    });
+  });
+}
 
 function addPost(post, media0, media1, media2, media3, poster, postRepliedTo){
   const db = new sqlite3.Database('./dwitter.db', (err) => {
@@ -111,8 +126,8 @@ function getUsername(ID){
       if (err) {
         console.error(err.message);
       } else{
-        console.log("Username for ID " + ID + ": " + JSON.stringify(username[0].username));
-        return(JSON.stringify(username[0].username);
+        console.log("Username for ID " + ID + ": " + JSON.stringify(user[0].username));
+        return JSON.stringify(user[0].username);
       }
     })
   });
@@ -125,12 +140,12 @@ function getUserHandle(ID){
     } else {
       console.log('Connected to the database');
     }
-    db.all(`SELECT username FROM userData where userID = ${ID}`, (err, user) => {
+    db.all(`SELECT userHandle FROM userData where userID = ${ID}`, (err, user) => {
       if (err) {
         console.error(err.message);
       } else{
-        console.log("Username for ID " + ID + ": " + JSON.stringify(username[0].userHandle));
-        return(JSON.stringify(username[0].userHandle);
+        console.log("User handle for ID " + ID + ": " + JSON.stringify(user[0].userHandle));
+        return JSON.stringify(username[0].userHandle);
       }
     })
   });
@@ -143,32 +158,48 @@ function getPassword(ID){
     } else {
       console.log('Connected to the database');
     }
-    db.all(`SELECT username FROM userData where userID = ${ID}`, (err, user) => {
+    db.all(`SELECT password FROM userData where userID = ${ID}`, (err, user) => {
       if (err) {
         console.error(err.message);
       } else{
-        console.log(`SELECT username FROM userData where userID = ${ID}`);
-        console.log("Username for ID " + ID + ": " + JSON.stringify(user[0].password));
-        return(JSON.stringify(username[0]password);
+        console.log("User password for ID " + ID + ": " + JSON.stringify(user[0].password));
+        return JSON.stringify(username[0].password);
       }
     })
   });
 }
 
-function getPassword(ID){
+function getProfilePicture(ID){
   const db = new sqlite3.Database('./dwitter.db', (err) => {
     if (err) {
       console.error('Error connecting to the database:', err.message);
     } else {
       console.log('Connected to the database');
     }
-    db.all(`SELECT username FROM userData where userID = ${ID}`, (err, user) => {
+    db.all(`SELECT profilePicture FROM userData where userID = ${ID}`, (err, user) => {
       if (err) {
         console.error(err.message);
       } else{
-        console.log(`SELECT username FROM userData where userID = ${ID}``);
-        console.log("Username for ID " + ID + ": " + JSON.stringify(user[0].password));
-        return(JSON.stringify(username[0]password);
+        console.log("User PFP for ID " + ID + ": " + JSON.stringify(user[0].profilePicture));
+        return JSON.stringify(username[0].profilePicture);
+      }
+    })
+  });
+}
+
+function getProfileBanner(ID){
+  const db = new sqlite3.Database('./dwitter.db', (err) => {
+    if (err) {
+      console.error('Error connecting to the database:', err.message);
+    } else {
+      console.log('Connected to the database');
+    }
+    db.all(`SELECT profileBanner FROM userData where userID = ${ID}`, (err, user) => {
+      if (err) {
+        console.error(err.message);
+      } else{
+        console.log("User banner for ID " + ID + ": " + JSON.stringify(user[0].profileBanner));
+        return JSON.stringify(username[0].profileBanner);
       }
     })
   });
@@ -193,6 +224,132 @@ function allDweetData(){
   });
 }
 
+function getPost(ID){
+  const db = new sqlite3.Database('./dwitter.db', (err) => {
+    if (err) {
+      console.error('Error connecting to the database:', err.message);
+    } else {
+      console.log('Connected to the database');
+    }
+    db.all(`SELECT post FROM dweetData where dweetID = ${ID}`, (err, dweet) => {
+      if (err) {
+        console.error(err.message);
+      } else{
+        console.log("Post for ID " + ID + ": " + JSON.stringify(dweet[0].post));
+        return JSON.stringify(dweet[0].post);
+      }
+    })
+  });
+}
+
+function getmedia0(ID){
+  const db = new sqlite3.Database('./dwitter.db', (err) => {
+    if (err) {
+      console.error('Error connecting to the database:', err.message);
+    } else {
+      console.log('Connected to the database');
+    }
+    db.all(`SELECT media0 FROM dweetData where dweetID = ${ID}`, (err, dweet) => {
+      if (err) {
+        console.error(err.message);
+      } else{
+        console.log("Media0 for ID " + ID + ": " + JSON.stringify(dweet[0].media0));
+        return JSON.stringify(dweet[0].media0);
+      }
+    })
+  });
+}
+
+function getmedia1(ID){
+  const db = new sqlite3.Database('./dwitter.db', (err) => {
+    if (err) {
+      console.error('Error connecting to the database:', err.message);
+    } else {
+      console.log('Connected to the database');
+    }
+    db.all(`SELECT media1 FROM dweetData where dweetID = ${ID}`, (err, dweet) => {
+      if (err) {
+        console.error(err.message);
+      } else{
+        console.log("Media1 for ID " + ID + ": " + JSON.stringify(dweet[0].media1));
+        return JSON.stringify(dweet[0].media1);
+      }
+    })
+  });
+}
+
+function getmedia2(ID){
+  const db = new sqlite3.Database('./dwitter.db', (err) => {
+    if (err) {
+      console.error('Error connecting to the database:', err.message);
+    } else {
+      console.log('Connected to the database');
+    }
+    db.all(`SELECT media0 FROM dweetData where dweetID = ${ID}`, (err, dweet) => {
+      if (err) {
+        console.error(err.message);
+      } else{
+        console.log("Media2 for ID " + ID + ": " + JSON.stringify(dweet[0].media2));
+        return JSON.stringify(dweet[0].media2);
+      }
+    })
+  });
+}
+
+function getmedia3(ID){
+  const db = new sqlite3.Database('./dwitter.db', (err) => {
+    if (err) {
+      console.error('Error connecting to the database:', err.message);
+    } else {
+      console.log('Connected to the database');
+    }
+    db.all(`SELECT media3 FROM dweetData where dweetID = ${ID}`, (err, dweet) => {
+      if (err) {
+        console.error(err.message);
+      } else{
+        console.log("Media3 for ID " + ID + ": " + JSON.stringify(dweet[0].media3));
+        return JSON.stringify(dweet[0].media3);
+      }
+    })
+  });
+}
+
+function getPoster(ID){
+  const db = new sqlite3.Database('./dwitter.db', (err) => {
+    if (err) {
+      console.error('Error connecting to the database:', err.message);
+    } else {
+      console.log('Connected to the database');
+    }
+    db.all(`SELECT poster FROM dweetData where dweetID = ${ID}`, (err, dweet) => {
+      if (err) {
+        console.error(err.message);
+      } else{
+        console.log("Poster for ID " + ID + ": " + JSON.stringify(dweet[0].poster));
+        return JSON.stringify(dweet[0].poster);
+      }
+    })
+  });
+}
+
+function getPostRepliedTo(ID){
+  const db = new sqlite3.Database('./dwitter.db', (err) => {
+    if (err) {
+      console.error('Error connecting to the database:', err.message);
+    } else {
+      console.log('Connected to the database');
+    }
+    db.all(`SELECT postRepliedTo FROM dweetData where dweetID = ${ID}`, (err, dweet) => {
+      if (err) {
+        console.error(err.message);
+      } else{
+        console.log("Post Replied To for ID " + ID + ": " + JSON.stringify(dweet[0].postRepliedTo));
+        return JSON.stringify(dweet[0].postRepliedTo);
+      }
+    })
+  });
+}
+
 function testerMethod(){
   //createTable();
   //addUser("Tyson", "spark_of_humanity", "Brandt", "tysonbrandt.jpg", "");
@@ -202,6 +359,8 @@ function testerMethod(){
   //allUserData();
   //allDweetData();
   getUsername(0);
+  getPost(0);
+  //changeUsername(0, "Brandt_da_man")
 }
 
 testerMethod();
