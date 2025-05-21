@@ -46,3 +46,6 @@ endritI, leonH -- 2025-05-15 11:42
 evanC, leonH -- 2025--05-16 11:44
 - Create new droplet and set up nginx
 - Errors from pm2 on old droplets
+
+marcoQ -- 2025-05-21 11:00
+- Completed database functions
