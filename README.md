@@ -11,7 +11,7 @@ D(witter) is a derivative of the popular social media platform X, formerly known
 2. Install all modules with ```npm install```
 
 ## Launch Codes
-**For Spinning 'D' Up on Local Host**  
+**For Spinning Dwitter Up on Local Host**  
 
 1. Navigate into the project directory with ```cd app```
 2. Start the server with ```node index.js```
