@@ -58,11 +58,59 @@ function changeUsername(ID, newUsername) {
     } else {
       console.log('Connected to the database');
     }
-    db.run("UPDATE userData SET username = (?) WHERE userID = (?)", [newUsername], [ID], function(err){
+    db.run(`UPDATE userData SET username = ? WHERE userID = ?`, [newUsername, ID], function(err){
       if (err) {
         return console.error(err.message);
       }
-      console.log(`Username iwth user ID ${ID} has been changed`);
+      console.log(`Username with user ID ${ID} has been changed`);
+    });
+  });
+}
+
+function changePassword(ID, newPassword) {
+  const db = new sqlite3.Database('./dwitter.db', (err) => {
+    if (err) {
+      console.error('Error connecting to the database:', err.message);
+    } else {
+      console.log('Connected to the database');
+    }
+    db.run(`UPDATE userData SET password = ? WHERE userID = ?`, [newPassword, ID], function(err){
+      if (err) {
+        return console.error(err.message);
+      }
+      console.log(`Username with user ID ${ID} has been changed`);
+    });
+  });
+}
+
+function changeProfilePicture(ID, newProfilePicture) {
+  const db = new sqlite3.Database('./dwitter.db', (err) => {
+    if (err) {
+      console.error('Error connecting to the database:', err.message);
+    } else {
+      console.log('Connected to the database');
+    }
+    db.run(`UPDATE userData SET profilePicture = ? WHERE userID = ?`, [newProfilePicture, ID], function(err){
+      if (err) {
+        return console.error(err.message);
+      }
+      console.log(`Username with user ID ${ID} has been changed`);
+    });
+  });
+}
+
+function changeProfileBanner(ID, newProfileBanner) {
+  const db = new sqlite3.Database('./dwitter.db', (err) => {
+    if (err) {
+      console.error('Error connecting to the database:', err.message);
+    } else {
+      console.log('Connected to the database');
+    }
+    db.run(`UPDATE userData SET profileBanner = ? WHERE userID = ?`, [newProfileBanner, ID], function(err){
+      if (err) {
+        return console.error(err.message);
+      }
+      console.log(`Username with user ID ${ID} has been changed`);
     });
   });
 }
@@ -356,11 +404,11 @@ function testerMethod(){
   //addUser("Elli", "dawarden", "Verdandi", "krow.png", "timeaftertime.jpg");
   //addPost("New phone. who dis?", null, null, null, null, 0, null);
   //addPost("This isn't a new phone, idiot.", "facepalm.gif", null, null, null, 1, 0);
-  //allUserData();
+  allUserData();
   //allDweetData();
-  getUsername(0);
-  getPost(0);
-  //changeUsername(0, "Brandt_da_man")
+  //getUsername(0);
+  //getPost(0);
+  changeUsername(0, "Tyson")
 }
 
 testerMethod();
