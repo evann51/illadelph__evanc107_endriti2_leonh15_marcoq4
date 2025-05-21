@@ -7,7 +7,7 @@ D(witter) is a derivative of the popular social media platform X, formerly known
 
 
 ## Install Guide
-1. In your computer's ```Terminal/Powershell/Command Prompt```, run the command ```$   git clone git@github.com:evann51/illadelph__evanc107_endriti2_leonh15_marcoq4.git``` in the directory you want this file to be in.
+1. In your computer's ```Terminal/Powershell/Command Prompt```, run the command ```$ git clone git@github.com:evann51/illadelph__evanc107_endriti2_leonh15_marcoq4.git``` in the directory you want this file to be in.
 2. Install all modules with ```npm install```
 
 ## Launch Codes
