@@ -23,33 +23,30 @@ function createTable(){
   });
 };
 
-function addUser(username, userHandle, password, profilePicture, profileBanner){
+function addUser(username, userHandle, password, profilePicture, profileBanner, callback) {
   const db = new sqlite3.Database('./dwitter.db', (err) => {
-    if (err) {
-      console.error('Error connecting to the database:', err.message);
-    } else {
-      console.log('Connected to the database');
-    }
-    let num = 0;
+    if (err) return callback(err);
 
-    db.all("SELECT userID FROM userData;", (err, column) => {
+    db.get("SELECT COUNT(*) AS count FROM userData", (err, row) => {
       if (err) {
-        console.error(err.message);
+        db.close();
+        return callback(err);
       }
-      if (column != null) {
-        num = Object.keys(column).length;
-      }
-      //console.log("Column: " + Object.keys(column).length);
-      //console.log("Variable num: " + num);
-      db.run("INSERT INTO userData (userID, username, userHandle, password, profilePicture, profileBanner) VALUES (?, ?, ?, ?, ?, ?)", [num, username, userHandle, password, profilePicture, profileBanner], function(err) {
-        if (err) {
-          return console.error(err.message);
+
+      const num = row.count;
+
+      db.run(
+        "INSERT INTO userData (userID, username, userHandle, password, profilePicture, profileBanner) VALUES (?, ?, ?, ?, ?, ?)",
+        [num, username, userHandle, password, profilePicture, profileBanner],
+        function(err) {
+          db.close();
+          callback(err); // null on success
         }
-      });
+      );
     });
-    db.close();
   });
-};
+}
+
 
 function changeUsername(ID, newUsername) {
   const db = new sqlite3.Database('./dwitter.db', (err) => {

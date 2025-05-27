@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title> D </title>
+    <link rel="icon" type="image/x-icon" href="/images/logo.jpg">
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!--css -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='/public/css/styles.css') }}">
+
+    <!-- Additional Styles -->
+    <style>
+        /* Base Styles */
+        body {
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .footer {
+          position: fixed;
+          left: 0;
+          bottom: 0;
+          width: 100%;
+          text-align: center;
+        }
+
+
+        /* Navbar and Footer Transitions */
+        .navbar, .footer {
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        img {
+          transition: filter 0.3s ease;
+        }
+
+        .navbar a, .footer a {
+            transition: color 0.3s;
+        }
+
+        /* Mode Switcher Styles */
+        #modeSwitcherMenu a {
+            color: #000000;
+        }
+
+        #modeSwitcherMenu a:hover {
+            background-color: #f0f0f0;
+        }
+
+        #modeSwitcherBtn {
+            color: #000000;
+        }
+
+        /* Light Mode */
+        body.light-mode {
+            background-color: #F2F0EF;
+            color: #000000;
+        }
+
+        body.light-mode textarea {
+            background-color: #F2F0EF;
+            color: #000000;
+            border: 1px solid #ccc;
+        }
+
+        body.light-mode img {
+            filter: invert(1);
+        }
+
+        .navbar.light-mode, .footer.light-mode {
+            background-color: #ffffff;
+            color: #000000;
+        }
+
+        .navbar.light-mode a {
+            color: #000000;
+        }
+
+        .navbar.light-mode a:hover {
+            color: #555555;
+        }
+
+        .footer.light-mode a {
+            color: #000000;
+        }
+
+        /* Dark Mode */
+        body.dark-mode {
+            background-color: #121212;
+            color: #ffffff;
+        }
+
+        .navbar.dark-mode, .footer.dark-mode {
+            background-color: #000000;
+            color: #ffffff;
+        }
+
+        .navbar.dark-mode a {
+            color: #ffffff;
+        }
+
+        .navbar.dark-mode a:hover {
+            color: #bbbbbb;
+        }
+
+        .footer.dark-mode a {
+            color: #ffffff;
+        }
+
+        body.dark-mode img {
+            filter: invert(0);
+        }
+
+        body.dark-mode input {
+            color: #191c1c;
+            background-color: #ffffff; /* Match the cyan background */
+            border-color: #000000; /* Optional: accent color for the border */
+        }
+
+        body.dark-mode h2 {
+            color: white;
+        }
+        body.dark-mode textarea {
+            background-color: #ffffff;
+            color: #000000;
+            border: 1px solid #555;
+        }
+
+        /* Additional Styles for Validation */
+        .valid {
+            color: green;
+        }
+
+        .invalid {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <!-- Sidebar Navigation -->
+    <nav class="navbar fixed left-0 top-0 h-full w-64 bg-white dark:bg-black shadow flex flex-col gap-4 p-6">
+        <div>
+            <a href="/" class="text-2xl font-bold mb-6 block">
+                <img src="/images/logo.jpg" width="40" height="40">
+            </a>
+            <ul class="space-y-4">
+                <li><a href="/search" class="text-gray-600 dark:text-white hover:text-gray-800 ">Search</a></li>
+                <li><a href="/notis" class="text-gray-600 dark:text-white hover:text-gray-800">Notifications</a></li>
+                <li><a href="/dms" class="text-gray-600 dark:text-white hover:text-gray-800">Direct Messages</a></li>
+            </ul>
+        </div>
+        <div class="space-y-4">
+          <div class="relative">
+            <button id="modeSwitcherBtn" class="w-full bg-blue-400 dark:bg-blue-400 text-black dark:text-white px-4 py-2 rounded hover:bg-blue-500 dark:hover:bg-blue-500">
+                Mode
+            </button>
+            <div id="modeSwitcherMenu" class="hidden absolute left-full ml-2 top-0 w-32 bg-white border border-gray-400 rounded-lg shadow-lg z-50">
+                <a href="#" class="block px-4 py-2 hover:bg-gray-100" onclick="setMode('light')">Light</a>
+                <a href="#" class="block px-4 py-2 hover:bg-gray-100" onclick="setMode('dark')">Dark</a>
+            </div>
+          </div>
+                <a href="/profile" class="bg-purple-500 text-white px-4 py-2 rounded hover:bg-purple-600 block text-center">Profile</a>
+                <a href="/logout" class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 block text-center">Logout</a>
+                <a href="/login" class="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 block text-center">Login</a>
+                <a href="/register" class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 block text-center">Register</a>
+        </div>
+    </nav>
+
+
+    <!-- Main Content -->
+    <div class="ml-64 px-4 mt-6">
+    </div>
+
+
+    <!-- Footer -->
+    <footer class="footer bg-white shadow mt-8">
+        <div class="container mx-auto px-4 py-6 text-center">
+            &copy; D (witter)
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script>
+        // Function to set the user mode
+        function setMode(mode) {
+            // Remove existing mode classes
+            document.body.classList.remove('light-mode', 'dark-mode');
+            const navbar = document.querySelector('.navbar');
+            const footer = document.querySelector('.footer');
+            navbar.classList.remove('light-mode', 'dark-mode');
+            footer.classList.remove('light-mode', 'dark-mode');
+
+            // Apply new mode
+            if (mode === 'custom') {
+                // Load custom theme if it exists
+                const savedTheme = JSON.parse(localStorage.getItem('customTheme'));
+                if (savedTheme) {
+                    document.documentElement.style.setProperty('--bg-color', savedTheme.bgColor);
+                    document.documentElement.style.setProperty('--text-color', savedTheme.textColor);
+                    document.documentElement.style.setProperty('--accent-color', savedTheme.accentColor);
+                } else {
+                    // If no custom theme is saved, default to light mode
+                    setMode('light');
+                    return;
+                }
+            } else {
+                document.body.classList.add(`${mode}-mode`);
+                navbar.classList.add(`${mode}-mode`);
+                footer.classList.add(`${mode}-mode`);
+            }
+
+            // Save the mode to localStorage
+            localStorage.setItem('mode', mode);
+
+            // Highlight the current mode in the dropdown menu
+            const modeLinks = document.querySelectorAll('#modeSwitcherMenu a');
+            modeLinks.forEach(link => link.classList.remove('bg-blue-500', 'text-white')); // Remove highlight
+            const currentModeLink = document.querySelector(`#modeSwitcherMenu a[onclick="setMode('${mode}')"]`);
+            if (currentModeLink) {
+                currentModeLink.classList.add('bg-blue-500', 'text-white'); // Add highlight
+            }
+
+            // Close the mode switcher menu
+            document.getElementById('modeSwitcherMenu').classList.add('hidden');
+        }
+
+
+        // Function to load the saved mode on page load
+        function loadMode() {
+            const savedMode = localStorage.getItem('mode') || 'dark'; // 'dark' is default
+            setMode(savedMode);
+        }
+
+        // Event listener to initialize theme on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            loadMode();
+
+            // Toggle dropdown menu
+            const modeSwitcherBtn = document.getElementById('modeSwitcherBtn');
+            const modeSwitcherMenu = document.getElementById('modeSwitcherMenu');
+
+            modeSwitcherBtn.addEventListener('click', function(event) {
+                event.stopPropagation();
+                modeSwitcherMenu.classList.toggle('hidden');
+            });
+
+            // Close the dropdown when clicking outside
+            document.addEventListener('click', function() {
+                modeSwitcherMenu.classList.add('hidden');
+            });
+        });
+    </script>
+</body>
+</html>
