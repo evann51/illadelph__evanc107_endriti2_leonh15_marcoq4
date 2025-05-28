@@ -220,14 +220,15 @@
 
               <!-- password Requirements -->
               <ul class="password-requirements mt-2 text-sm">
-                  <li id="length" data-text="At least 12 characters" class="invalid text-red-600">&#10008; At least 12 characters</li>
-                  <li id="lowercase" data-text="At least one lowercase letter" class="invalid text-red-600">&#10008; At least one lowercase letter</li>
+                  <li id="length" data-text="At least 6 characters" class="invalid text-red-600">&#10008; At least 6 characters</li>
+                  <!-- <li id="lowercase" data-text="At least one lowercase letter" class="invalid text-red-600">&#10008;  one lowercase letter</li>
                   <li id="uppercase" data-text="At least one uppercase letter" class="invalid text-red-600">&#10008; At least one uppercase letter</li>
                   <li id="number" data-text="At least one number" class="invalid text-red-600">&#10008; At least one number</li>
+                  -->
                   <li id="match" data-text="Passwords must match" class="invalid text-red-600">&#10008; Passwords must match</li>
               </ul>
 
-              <button type="submit" class="w-full bg-green-500 text-white py-2 px-4 rounded-lg hover:bg-green-600 transition">Register</button>
+              <button href="/login" type="submit" class="w-full bg-green-500 text-white py-2 px-4 rounded-lg hover:bg-green-600 transition">Register</button>
           </form>
 
           <p class="mt-4 text-center">
@@ -259,10 +260,10 @@
                   const confirmPassword = document.getElementById('confirm_password').value;
 
                   const checks = {
-                      length: password.length >= 12,
-                      lowercase: /[a-z]/.test(password),
-                      uppercase: /[A-Z]/.test(password),
-                      number: /[0-9]/.test(password),
+                      length: password.length >= 6,
+                      //lowercase: /[a-z]/.test(password),
+                      //uppercase: /[A-Z]/.test(password),
+                      //number: /[0-9]/.test(password),
                       match: password === confirmPassword && password !== ''
                   };
 

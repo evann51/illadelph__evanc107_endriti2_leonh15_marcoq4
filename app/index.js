@@ -35,26 +35,10 @@ app.get('/register', (req, res) => {
 });
 
 app.post('/register', (req, res) => {
-  const { username, userHandle, password, confirm_password } = req.body;
-
-  if (password !== confirm_password) {
-    return res.render('register', { error: 'Passwords do not match' });
-  }
-
-  const hashed = hashPassword(password);
-
-  const db = new sqlite3.Database('./dwitter.db'); // marco fix this plz
-  const sql = `INSERT INTO userData (username, userHandle, password) VALUES (?, ?, ?)`;
-
-  db.run(sql, [username, userHandle, hashed], function(err) {
-    if (err) {
-      console.error(err);
-      return res.render('register', { error: 'Username or handle may already be taken.' });
-    }
-    res.redirect('/login');
-  });
-
-  db.close();
+  const { username, password, confirm_password } = req.body;
+  console.log(username)
+  db.addUser(username, username, password);
+  res.redirect('/login');
 });
 
 app.get('/login', (req, res) => {

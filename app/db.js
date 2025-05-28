@@ -23,30 +23,33 @@ function createTable(){
   });
 };
 
-function addUser(username, userHandle, password, profilePicture, profileBanner, callback) {
+function addUser(username, userHandle, password, profilePicture, profileBanner){
   const db = new sqlite3.Database('./dwitter.db', (err) => {
-    if (err) return callback(err);
+    if (err) {
+      console.error('Error connecting to the database:', err.message);
+    } else {
+      console.log('Connected to the database');
+    }
+    let num = 0;
 
-    db.get("SELECT COUNT(*) AS count FROM userData", (err, row) => {
+    db.all("SELECT userID FROM userData;", (err, column) => {
       if (err) {
-        db.close();
-        return callback(err);
+        console.error(err.message);
       }
-
-      const num = row.count;
-
-      db.run(
-        "INSERT INTO userData (userID, username, userHandle, password, profilePicture, profileBanner) VALUES (?, ?, ?, ?, ?, ?)",
-        [num, username, userHandle, password, profilePicture, profileBanner],
-        function(err) {
-          db.close();
-          callback(err); // null on success
+      if (column != null) {
+        num = Object.keys(column).length;
+      }
+      //console.log("Column: " + Object.keys(column).length);
+      //console.log("Variable num: " + num);
+      db.run("INSERT INTO userData (userID, username, userHandle, password, profilePicture, profileBanner) VALUES (?, ?, ?, ?, ?, ?)", [num, username, userHandle, password, profilePicture, profileBanner], function(err) {
+        if (err) {
+          return console.error(err.message);
         }
-      );
+      });
     });
+    db.close();
   });
-}
-
+};
 
 function changeUsername(ID, newUsername) {
   const db = new sqlite3.Database('./dwitter.db', (err) => {
@@ -396,7 +399,7 @@ function getPostRepliedTo(ID){
 }
 
 function testerMethod(){
-  createTable();
+  //createTable();
   //addUser("Tyson", "spark_of_humanity", "Brandt", "tysonbrandt.jpg", "");
   //addUser("Elli", "dawarden", "Verdandi", "krow.png", "timeaftertime.jpg");
   //addPost("New phone. who dis?", null, null, null, null, 0, null);
@@ -433,4 +436,3 @@ module.exports = {
   getPoster,
   getPostRepliedTo
 };
-
