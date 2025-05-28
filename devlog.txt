@@ -49,3 +49,7 @@ evanC, leonH -- 2025--05-16 11:44
 
 marcoQ -- 2025-05-21 11:00
 - Completed database functions
+
+evanC -- 2025-05-28 00:40
+- fixed node routes so they actually work
+- gitignore

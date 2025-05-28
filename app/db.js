@@ -396,7 +396,7 @@ function getPostRepliedTo(ID){
 }
 
 function testerMethod(){
-  //createTable();
+  createTable();
   //addUser("Tyson", "spark_of_humanity", "Brandt", "tysonbrandt.jpg", "");
   //addUser("Elli", "dawarden", "Verdandi", "krow.png", "timeaftertime.jpg");
   //addPost("New phone. who dis?", null, null, null, null, 0, null);
@@ -409,3 +409,28 @@ function testerMethod(){
 }
 
 testerMethod();
+
+module.exports = {
+  createTable,
+  addUser,
+  addPost,
+  changeUsername,
+  changePassword,
+  changeProfilePicture,
+  changeProfileBanner,
+  allUserData,
+  getUsername,
+  getUserHandle,
+  getPassword,
+  getProfilePicture,
+  getProfileBanner,
+  allDweetData,
+  getPost,
+  getmedia0,
+  getmedia1,
+  getmedia2,
+  getmedia3,
+  getPoster,
+  getPostRepliedTo
+};
+
