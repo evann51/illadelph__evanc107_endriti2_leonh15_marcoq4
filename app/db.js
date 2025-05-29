@@ -181,6 +181,26 @@ function getUsername(ID){
   });
 }
 
+/* function getID(userHandle){
+  const db = new sqlite3.Database('./dwitter.db', (err) => {
+    if (err) {
+      console.error('Error connecting to the database:', err.message);
+    } else {
+      console.log('Connected to the database');
+    }
+    db.all(`SELECT userID FROM userData where userHandle = ${userHandle}`, (err, user) => {
+      if (err) {
+        console.log("one");
+        console.error(err.message);
+      } else{
+        console.log("two");
+        console.log("ID for userHandle " + userHandle + ": " + JSON.stringify(user[0].userID));
+        return JSON.stringify(user[0].userID);
+      }
+    })
+  });
+} */
+
 function getUserHandle(ID){
   const db = new sqlite3.Database('./dwitter.db', (err) => {
     if (err) {
@@ -434,5 +454,6 @@ module.exports = {
   getmedia2,
   getmedia3,
   getPoster,
-  getPostRepliedTo
+  getPostRepliedTo,
+  getID
 };
