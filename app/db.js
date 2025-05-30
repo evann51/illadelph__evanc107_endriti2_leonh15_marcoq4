@@ -188,8 +188,8 @@ function getUserID(username){
     } else {
       console.log('Connected to the database');
     }
-    
-    db.all(`SELECT userID FROM userData where username = ${username}`, (err, user) => {
+
+    db.all(`SELECT userID FROM userData where username = '${username}'`, (err, user) => {
       if (err) {
         console.log("one");
         console.error(err.message);
@@ -420,12 +420,12 @@ function getPostRepliedTo(ID){
 }
 
 function testerMethod(){
-  createTable();
-  addUser("Tyson", "spark_of_humanity", "Brandt", "tysonbrandt.jpg", "");
-  addUser("Elli", "dawarden", "Verdandi", "krow.png", "timeaftertime.jpg");
-  addPost("New phone. who dis?", null, null, null, null, 0, null);
-  addPost("This isn't a new phone, idiot.", "facepalm.gif", null, null, null, 1, 0);
-  allUserData();
+  //createTable();
+  //addUser("Tyson", "spark_of_humanity", "Brandt", "tysonbrandt.jpg", "");
+  //addUser("Elli", "dawarden", "Verdandi", "krow.png", "timeaftertime.jpg");
+  //addPost("New phone. who dis?", null, null, null, null, 0, null);
+  //addPost("This isn't a new phone, idiot.", "facepalm.gif", null, null, null, 1, 0);
+  //allUserData();
   //allDweetData();
   //getUsername(0);
   //getPost(0);
