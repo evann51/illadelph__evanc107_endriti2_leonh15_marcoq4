@@ -36,8 +36,8 @@ app.get('/register', (req, res) => {
 
 app.post('/register', (req, res) => {
   var { username, password, confirm_password } = req.body;
-  console.log(username)
-  db.addUser(username, username, password);
+  const hashedPassword = hashPassword(password);
+  db.addUser(username, username, hashedPassword);
   res.redirect('/login');
 });
 
@@ -46,26 +46,29 @@ app.get('/login', (req, res) => {
 });
 
 app.post('/login', (req, res) => {
-  var { username, password } = req.body;
-  var hashed = hashPassword(password);
-  console.log(username);
-  var ID = db.getID(username);
-  console.log("yummy: " + ID);
-  var correctPass = db.getPassword(ID);
-  if (correctPass == password){
-    console.log(correctPass);
-    console.log(password);
+  const { username, password } = req.body;
+  const hashed = hashPassword(password);
+
+  db.getUserID(username, (err, user) => {
+    if (err) {
+      return res.render('login', { error: 'Database error' });
+    }
+
+    if (!user || user.password !== hashed) {
+      return res.render('login', { error: 'Invalid credentials' });
+    }
+
     req.session.user = {
-      id: user.UserID,
+      id: user.userID,
       username: user.username,
       userHandle: user.userHandle
     };
 
     res.redirect('/');
-  }
-  else{
-    res.redirect('/login');
-  }
+  });
+
+
+
 });
 
 app.get('/logout', (req, res) => {

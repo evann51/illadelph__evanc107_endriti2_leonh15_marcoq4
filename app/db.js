@@ -188,6 +188,7 @@ function getUserID(username){
     } else {
       console.log('Connected to the database');
     }
+    
     db.all(`SELECT userID FROM userData where username = ${username}`, (err, user) => {
       if (err) {
         console.log("one");
@@ -456,5 +457,5 @@ module.exports = {
   getmedia3,
   getPoster,
   getPostRepliedTo,
-  getID
+  getUserID
 };
