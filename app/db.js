@@ -181,25 +181,25 @@ function getUsername(ID){
   });
 }
 
-/* function getID(userHandle){
+function getUserID(username){
   const db = new sqlite3.Database('./dwitter.db', (err) => {
     if (err) {
       console.error('Error connecting to the database:', err.message);
     } else {
       console.log('Connected to the database');
     }
-    db.all(`SELECT userID FROM userData where userHandle = ${userHandle}`, (err, user) => {
+    db.all(`SELECT userID FROM userData where username = ${username}`, (err, user) => {
       if (err) {
         console.log("one");
         console.error(err.message);
       } else{
         console.log("two");
-        console.log("ID for userHandle " + userHandle + ": " + JSON.stringify(user[0].userID));
+        console.log("ID for username " + username + ": " + JSON.stringify(user[0].userID));
         return JSON.stringify(user[0].userID);
       }
     })
   });
-} */
+}
 
 function getUserHandle(ID){
   const db = new sqlite3.Database('./dwitter.db', (err) => {
@@ -419,16 +419,17 @@ function getPostRepliedTo(ID){
 }
 
 function testerMethod(){
-  //createTable();
-  //addUser("Tyson", "spark_of_humanity", "Brandt", "tysonbrandt.jpg", "");
-  //addUser("Elli", "dawarden", "Verdandi", "krow.png", "timeaftertime.jpg");
-  //addPost("New phone. who dis?", null, null, null, null, 0, null);
-  //addPost("This isn't a new phone, idiot.", "facepalm.gif", null, null, null, 1, 0);
+  createTable();
+  addUser("Tyson", "spark_of_humanity", "Brandt", "tysonbrandt.jpg", "");
+  addUser("Elli", "dawarden", "Verdandi", "krow.png", "timeaftertime.jpg");
+  addPost("New phone. who dis?", null, null, null, null, 0, null);
+  addPost("This isn't a new phone, idiot.", "facepalm.gif", null, null, null, 1, 0);
   allUserData();
   //allDweetData();
   //getUsername(0);
   //getPost(0);
-  changeUsername(0, "Tyson")
+  getUserID("Tyson");
+  //changeUsername(0, "Tyson")
 }
 
 testerMethod();
