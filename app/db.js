@@ -195,8 +195,14 @@ function getUserID(username){
         console.error(err.message);
       } else{
         console.log("two");
-        console.log("ID for username " + username + ": " + JSON.stringify(user[0].userID));
-        return JSON.stringify(user[0].userID);
+        if(user.length > 0){
+          console.log(user);
+          console.log(user[0]);
+          console.log("ID for username " + username + ": " + JSON.stringify(user[0].userID));
+          return JSON.stringify(user[0].userID);
+        } else{
+          console.log("username doesn't exist")
+        }
       }
     })
   });
@@ -429,7 +435,7 @@ function testerMethod(){
   //allDweetData();
   //getUsername(0);
   //getPost(0);
-  getUserID("Tyson");
+  //getUserID("tyson");
   //changeUsername(0, "Tyson")
 }
 
