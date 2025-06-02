@@ -11,145 +11,149 @@
 
     <!-- Additional Styles -->
     <style>
-        /* Base Styles */
-        body {
-            transition: background-color 0.3s, color 0.3s;
-        }
+      body {
+          transition: background-color 0.3s, color 0.3s;
+      }
+      /* Base Styles */
+      .footer {
+        position: fixed;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        text-align: center;
+      }
 
-        .footer {
-          position: fixed;
-          left: 0;
-          bottom: 0;
-          width: 100%;
-          text-align: center;
-        }
 
+      /* Navbar and Footer Transitions */
+      .navbar, .footer {
+          transition: background-color 0.3s, color 0.3s;
+      }
 
-        /* Navbar and Footer Transitions */
-        .navbar, .footer {
-            transition: background-color 0.3s, color 0.3s;
-        }
+      img {
+        transition: filter 0.3s ease;
+      }
 
-        img {
-          transition: filter 0.3s ease;
-        }
+      .navbar a, .footer a {
+          transition: color 0.3s;
+      }
 
-        .navbar a, .footer a {
-            transition: color 0.3s;
-        }
+      /* Mode Switcher Styles */
+      #modeSwitcherMenu a {
+          color: #000000;
+      }
 
-        /* Mode Switcher Styles */
-        #modeSwitcherMenu a {
-            color: #000000;
-        }
+      #modeSwitcherMenu a:hover {
+          background-color: #f0f0f0;
+      }
 
-        #modeSwitcherMenu a:hover {
-            background-color: #f0f0f0;
-        }
+      #modeSwitcherBtn {
+          color: #000000;
+      }
 
-        #modeSwitcherBtn {
-            color: #000000;
-        }
+      #links a{
+        color: light-grey;
+      }
+      #buttons a{
+        color: black;
+      }
 
-        /* Light Mode */
-        body.light-mode {
-            background-color: #F2F0EF;
-            color: #000000;
-        }
+      /* Light Mode */
+      body.light-mode {
+          background-color: #F2F0EF;
+          color: #000000;
+      }
 
-        body.light-mode textarea {
-            background-color: #F2F0EF;
-            color: #000000;
-            border: 1px solid #ccc;
-        }
+      body.light-mode textarea {
+          background-color: #F2F0EF;
+          color: #000000;
+          /* border: 1px solid ; */
+      }
 
-        body.light-mode img {
-            filter: invert(1);
-        }
+      body.light-mode img {
+          filter: invert(1);
+      }
 
-        body.dark-mode #sigup {
-            background-color: #000000;
-            color: white;
-        }
+      .navbar.light-mode, .footer.light-mode {
+          background-color: #ffffff;
+          color: #000000;
+      }
 
-        body.light-mode #sigup {
-            background-color: #ffffff;
-            color: #000000;
-        }
+      .navbar.light-mode a {
+          color: #000000;
+      }
 
-        .navbar.light-mode, .footer.light-mode {
-            background-color: #ffffff;
-            color: #000000;
-        }
+      .navbar.light-mode a:hover {
+          color: #555555;
+      }
 
-        .navbar.light-mode a {
-            color: #000000;
-        }
+      .footer.light-mode a {
+          color: #000000;
+      }
 
-        .navbar.light-mode a:hover {
-            color: #555555;
-        }
+      /* Dark Mode */
+      body.dark-mode {
+          background-color: #121212;
+          color: #ffffff;
+      }
 
-        .footer.light-mode a {
-            color: #000000;
-        }
+      .navbar.dark-mode, .footer.dark-mode {
+          background-color: #000000;
+          color: #ffffff;
+      }
 
-        /* Dark Mode */
-        body.dark-mode {
-            background-color: #121212;
-            color: #ffffff;
-        }
+      .navbar.dark-mode #links {
+          color: white;
+      }
 
-        .navbar.dark-mode, .footer.dark-mode {
-            background-color: #000000;
-            color: #ffffff;
-        }
+      .navbar.dark-mode #buttons {
+          color: yellow;
+      }
 
-        .navbar.dark-mode a {
-            color: #ffffff;
-        }
+      .navbar.dark-mode. #bottons:hover {
+          color: grey;
+      }
 
-        .navbar.dark-mode a:hover {
-            color: #bbbbbb;
-        }
+      body.dark-mode #links {
+        color: blue;
+      }
 
-        .footer.dark-mode a {
-            color: #ffffff;
-        }
+      .footer.dark-mode a {
+          color: #ffffff;
+      }
 
-        body.dark-mode img {
-            filter: invert(0);
-        }
+      body.dark-mode img {
+          filter: invert(0);
+      }
 
-        body.dark-mode input {
-            color: #191c1c;
-            background-color: #ffffff; /* Match the cyan background */
-            border-color: #000000; /* Optional: accent color for the border */
-        }
+      body.dark-mode input {
+          color: #191c1c;
+          background-color: #ffffff; /* Match the cyan background */
+          /* border-color: #000000;  Optional: accent color for the border */
+      }
 
-        body.dark-mode h2 {
-            color: white;
-        }
-        body.dark-mode textarea {
-            background-color: #ffffff;
-            color: #000000;
-            border: 1px solid #555;
-        }
+      body.dark-mode h2 {
+          color: white;
+      }
+      body.dark-mode textarea {
+          background-color: #ffffff;
+          color: white;
+          /* border: 1px solid #555; */
+      }
 
-        /* Additional Styles for Validation */
-        .valid {
-            color: green;
-        }
+      /* Additional Styles for Validation */
+      .valid {
+          color: green;
+      }
 
-        .invalid {
-            color: red;
-        }
+      .invalid {
+          color: red;
+      }
     </style>
 </head>
 <body>
     <!-- Sidebar Navigation -->
     <nav class="navbar fixed left-0 top-0 h-full w-64 bg-white dark:bg-black shadow flex flex-col gap-4 p-6">
-        <div>
+        <div id="links">
             <a href="/" class="text-2xl font-bold mb-6 block">
                 <img src="/images/logo.jpg" width="40" height="40">
             </a>
@@ -159,20 +163,20 @@
                 <li><a href="/dms" class="text-gray-600 dark:text-white hover:text-gray-800">Direct Messages</a></li>
             </ul>
         </div>
-        <div class="space-y-4">
+        <div id="buttons" class="space-y-4">
           <div class="relative">
-            <button id="modeSwitcherBtn" class="w-full bg-blue-400 dark:bg-blue-400 text-black dark:text-white px-4 py-2 rounded hover:bg-blue-500 dark:hover:bg-blue-500">
+            <button id="modeSwitcherBtn" class="w-full border border-black bg-blue-400 dark:bg-blue-400 text-black dark:text-white px-4 py-2 rounded-full hover:bg-blue-500 dark:hover:bg-blue-500">
                 Mode
             </button>
-            <div id="modeSwitcherMenu" class="hidden absolute left-full ml-2 top-0 w-32 bg-white border border-gray-400 rounded-lg shadow-lg z-50">
-                <a href="#" class="block px-4 py-2 hover:bg-gray-100" onclick="setMode('light')">Light</a>
-                <a href="#" class="block px-4 py-2 hover:bg-gray-100" onclick="setMode('dark')">Dark</a>
+            <div id="modeSwitcherMenu" class="hidden absolute left-full ml-2 top-0 w-32 bg-white border border-black rounded-lg shadow-lg z-50">
+                <a href="#" class="block px-4 py-2 hover:bg-gray-100 rounded-full" onclick="setMode('light')">Light</a>
+                <a href="#" class="block px-4 py-2 hover:bg-gray-100 rounded-full" onclick="setMode('dark')">Dark</a>
             </div>
           </div>
-                <a href="/profile" class="bg-purple-500 text-white px-4 py-2 rounded hover:bg-purple-600 block text-center">Profile</a>
-                <a href="/logout" class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 block text-center">Logout</a>
-                <a href="/login" class="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 block text-center">Login</a>
-                <a href="/register" class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 block text-center">Register</a>
+                <a href="/profile" class="bg-white border border-black text-black px-4 py-2 rounded-full hover:bg-gray-300 block text-center">Profile</a>
+                <a href="/logout" class="bg-white border border-black text-white px-4 py-2 rounded-full hover:bg-gray-300 block text-center">Logout</a>
+                <a href="/login" class="bg-white border border-black text-white px-4 py-2 rounded-full hover:bg-gray-300 block text-center">Login</a>
+                <a href="/register" class="bg-white border border-black text-white px-4 py-2 rounded-full hover:bg-gray-300 block text-center">Register</a>
         </div>
     </nav>
 
