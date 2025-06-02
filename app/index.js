@@ -48,13 +48,17 @@ app.get('/login', (req, res) => {
 app.post('/login', (req, res) => {
   const { username, password } = req.body;
   const hashed = hashPassword(password);
+  console.log(db.getUserID(username));
 
   db.getUserID(username, (err, user) => {
+    console.log("e");
     if (err) {
+      console.log("1")
       return res.render('login', { error: 'Database error' });
     }
 
     if (!user || user.password !== hashed) {
+      console.log("2")
       return res.render('login', { error: 'Invalid credentials' });
     }
 
@@ -67,7 +71,7 @@ app.post('/login', (req, res) => {
     res.redirect('/');
   });
 
-
+//res.redirect('/');
 
 });
 
