@@ -215,63 +215,63 @@
 
           <script>
               // function to validate username requirements
-              function validateUsername() {
-                  const username = document.getElementById('username').value;
-                  const noSpaceRequirement = document.getElementById('no-space');
-
-                  // i check if the username starts with a space
-                  if (username && username[0] === ' ') {
-                      noSpaceRequirement.classList.remove('valid');
-                      noSpaceRequirement.classList.add('invalid');
-                      noSpaceRequirement.innerHTML = '&#10008; ' + noSpaceRequirement.dataset.text;
-                  } else {
-                      noSpaceRequirement.classList.remove('invalid');
-                      noSpaceRequirement.classList.add('valid');
-                      noSpaceRequirement.innerHTML = '&#10004; ' + noSpaceRequirement.dataset.text;
-                  }
-              }
-
-              // function to validate password requirements
-              function validatePassword() {
-                  const password = document.getElementById('password').value;
-                  const confirmPassword = document.getElementById('confirm_password').value;
-
-                  const checks = {
-                      length: password.length >= 12,
-                      lowercase: /[a-z]/.test(password),
-                      uppercase: /[A-Z]/.test(password),
-                      number: /[0-9]/.test(password),
-                      match: password === confirmPassword && password !== ''
-                  };
-
-                  for (const [key, value] of Object.entries(checks)) {
-                      const element = document.getElementById(key);
-                      if (element) {
-                          if (value) {
-                              element.classList.remove('invalid');
-                              element.classList.add('valid');
-                              element.innerHTML = '&#10004; ' + element.dataset.text;
-                          } else {
-                              element.classList.remove('valid');
-                              element.classList.add('invalid');
-                              element.innerHTML = '&#10008; ' + element.dataset.text;
-                          }
-                      }
-                  }
-              }
-
-              // function to validate the entire form before submission
-              function validateForm() {
-                  const usernameValid = validateUsername();
-                  const passwordValid = true; // Password will be validated server-side
-
-                  return usernameValid && passwordValid;
-              }
-
-              // add event listeners for real-time validation
-              document.getElementById('username').addEventListener('input', validateUsername);
-              document.getElementById('password').addEventListener('input', validatePassword);
-              document.getElementById('confirm_password').addEventListener('input', validatePassword);
+              // function validateUsername() {
+              //     const username = document.getElementById('username').value;
+              //     const noSpaceRequirement = document.getElementById('no-space');
+              //
+              //     // i check if the username starts with a space
+              //     if (username && username[0] === ' ') {
+              //         noSpaceRequirement.classList.remove('valid');
+              //         noSpaceRequirement.classList.add('invalid');
+              //         noSpaceRequirement.innerHTML = '&#10008; ' + noSpaceRequirement.dataset.text;
+              //     } else {
+              //         noSpaceRequirement.classList.remove('invalid');
+              //         noSpaceRequirement.classList.add('valid');
+              //         noSpaceRequirement.innerHTML = '&#10004; ' + noSpaceRequirement.dataset.text;
+              //     }
+              // }
+              //
+              // // function to validate password requirements
+              // function validatePassword() {
+              //     const password = document.getElementById('password').value;
+              //     const confirmPassword = document.getElementById('confirm_password').value;
+              //
+              //     const checks = {
+              //         length: password.length >= 12,
+              //         lowercase: /[a-z]/.test(password),
+              //         uppercase: /[A-Z]/.test(password),
+              //         number: /[0-9]/.test(password),
+              //         match: password === confirmPassword && password !== ''
+              //     };
+              //
+              //     for (const [key, value] of Object.entries(checks)) {
+              //         const element = document.getElementById(key);
+              //         if (element) {
+              //             if (value) {
+              //                 element.classList.remove('invalid');
+              //                 element.classList.add('valid');
+              //                 element.innerHTML = '&#10004; ' + element.dataset.text;
+              //             } else {
+              //                 element.classList.remove('valid');
+              //                 element.classList.add('invalid');
+              //                 element.innerHTML = '&#10008; ' + element.dataset.text;
+              //             }
+              //         }
+              //     }
+              // }
+              //
+              // // function to validate the entire form before submission
+              // function validateForm() {
+              //     const usernameValid = validateUsername();
+              //     const passwordValid = true; // Password will be validated server-side
+              //
+              //     return usernameValid && passwordValid;
+              // }
+              //
+              // // add event listeners for real-time validation
+              // document.getElementById('username').addEventListener('input', validateUsername);
+              // document.getElementById('password').addEventListener('input', validatePassword);
+              // document.getElementById('confirm_password').addEventListener('input', validatePassword);
 
           </script>
 
