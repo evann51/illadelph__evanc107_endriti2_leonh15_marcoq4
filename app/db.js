@@ -8,7 +8,7 @@ function createTable(){
     } else {
       console.log('Connected to the database');
     }
-    db.run("CREATE TABLE IF NOT EXISTS userData (userID INTEGER PRIMARY KEY, username TEXT NOT NULL, userHandle TEXT UNIQUE NOT NULL, password TEXT NOT NULL, profilePicture TEXT, profileBanner TEXT)");
+    db.run("CREATE TABLE IF NOT EXISTS userData (userID INTEGER PRIMARY KEY, username TEXT UNIQUE NOT NULL, userHandle TEXT UNIQUE NOT NULL, password TEXT NOT NULL, profilePicture TEXT, profileBanner TEXT)");
     db.run("CREATE TABLE IF NOT EXISTS dweetData (dweetID INTEGER PRIMARY KEY, post TEXT NOT NULL, media0 TEXT, media1 TEXT, media2 TEXT, media3 TEXT, poster INTEGER NOT NULL, postRepliedTo INTEGER)");
     db.all("PRAGMA table_info(dweetData)", [], (err, rows) =>{
       if (err) {
@@ -175,7 +175,8 @@ function getUsername(ID){
         console.error(err.message);
       } else{
         console.log("Username for ID " + ID + ": " + JSON.stringify(user[0].username));
-        return JSON.stringify(user[0].username);
+        un = JSON.stringify(user[0].username);
+        return un;
       }
     })
   });
@@ -199,7 +200,9 @@ function getUserID(username){
           console.log(user);
           console.log(user[0]);
           console.log("ID for username " + username + ": " + JSON.stringify(user[0].userID));
-          return JSON.stringify(user[0].userID);
+          //return JSON.stringify(user[0].userID);
+          un = JSON.stringify(user[0].userID);
+          return un;
         } else{
           console.log("username doesn't exist")
         }
@@ -238,7 +241,8 @@ function getPassword(ID){
         console.error(err.message);
       } else{
         console.log("User password for ID " + ID + ": " + JSON.stringify(user[0].password));
-        return JSON.stringify(username[0].password);
+        un = JSON.stringify(user[0].password);
+        return un;
       }
     })
   });
@@ -256,7 +260,8 @@ function getProfilePicture(ID){
         console.error(err.message);
       } else{
         console.log("User PFP for ID " + ID + ": " + JSON.stringify(user[0].profilePicture));
-        return JSON.stringify(username[0].profilePicture);
+        un = JSON.stringify(user[0].profilePicture);
+        return un;
       }
     })
   });
@@ -274,7 +279,8 @@ function getProfileBanner(ID){
         console.error(err.message);
       } else{
         console.log("User banner for ID " + ID + ": " + JSON.stringify(user[0].profileBanner));
-        return JSON.stringify(username[0].profileBanner);
+        un = JSON.stringify(user[0].profileBanner);
+        return un;
       }
     })
   });
@@ -426,14 +432,14 @@ function getPostRepliedTo(ID){
 }
 
 function testerMethod(){
-  //createTable();
-  //addUser("Tyson", "spark_of_humanity", "Brandt", "tysonbrandt.jpg", "");
-  //addUser("Elli", "dawarden", "Verdandi", "krow.png", "timeaftertime.jpg");
+  createTable();
+  addUser("Tyson", "spark_of_humanity", "Brandt", "tysonbrandt.jpg", "");
+  addUser("Elli", "dawarden", "Verdandi", "krow.png", "timeaftertime.jpg");
   //addPost("New phone. who dis?", null, null, null, null, 0, null);
   //addPost("This isn't a new phone, idiot.", "facepalm.gif", null, null, null, 1, 0);
-  //allUserData();
+  allUserData();
   //allDweetData();
-  //getUsername(0);
+  console.log(0);
   //getPost(0);
   //getUserID("tyson");
   //changeUsername(0, "Tyson")
