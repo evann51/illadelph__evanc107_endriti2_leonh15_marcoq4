@@ -53,3 +53,6 @@ marcoQ -- 2025-05-21 11:00
 evanC -- 2025-05-28 00:40
 - fixed node routes so they actually work
 - gitignore
+
+evanC -- 2025-06-03 00:08
+- fixed a database function and ejs file function -> login and sessions work now

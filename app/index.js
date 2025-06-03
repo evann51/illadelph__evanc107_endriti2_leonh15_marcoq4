@@ -48,10 +48,9 @@ app.get('/login', (req, res) => {
 app.post('/login', (req, res) => {
   const { username, password } = req.body;
   const hashed = hashPassword(password);
-  console.log(db.getUserID(username));
 
   db.getUserID(username, (err, user) => {
-    console.log("e");
+    console.log("lemme in");
     if (err) {
       console.log("1")
       return res.render('login', { error: 'Database error' });
@@ -67,7 +66,6 @@ app.post('/login', (req, res) => {
       username: user.username,
       userHandle: user.userHandle
     };
-
     res.redirect('/');
   });
 
@@ -76,7 +74,9 @@ app.post('/login', (req, res) => {
 });
 
 app.get('/logout', (req, res) => {
+  console.log('Session dataaaaaa:', req.session);
   req.session.destroy(err => {
+    console.log('Session data:', req.session);
     res.redirect('/');
   });
 });

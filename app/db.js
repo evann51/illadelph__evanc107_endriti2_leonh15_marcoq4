@@ -182,25 +182,29 @@ function getUsername(ID){
   });
 }
 
-function getUserID(username){
+function getUserID(username, callback) {
   const db = new sqlite3.Database('./dwitter.db', (err) => {
     if (err) {
       console.error('Error connecting to the database:', err.message);
-    } else {
-      console.log('Connected to the database');
+      return callback(err);
     }
 
-    db.all(`SELECT userID FROM userData where username = '${username}'`, (err, user) => {
+    const sql = `SELECT * FROM userData WHERE username = ?`;
+    db.get(sql, [username], (err, user) => {
+      db.close();
       if (err) {
-        console.log("one");
-        console.error(err.message);
-      } else{
-        console.log("two");
-        console.log("ID for username " + username + ": " + JSON.stringify(user[0].userID));
-        fin = JSON.stringify(user[0].userID);
-        return fin;
+        console.error('Database query error:', err.message);
+        return callback(err);
       }
-    })
+
+      if (user) {
+        console.log(`Found user ${username}: ${JSON.stringify(user)}`);
+        return callback(null, user);
+      } else {
+        console.log(`No user found for username: ${username}`);
+        return callback(null, null);
+      }
+    });
   });
 }
 
@@ -439,7 +443,7 @@ function testerMethod(){
   //addPost("This isn't a new phone, idiot.", "facepalm.gif", null, null, null, 1, 0);
   allUserData();
   //allDweetData();
-  console.log(getUserID("Elli"));
+  //console.log(getUserID("Elli"));
   //getPost(0);
   //getUserID("tyson");
   //changeUsername(0, "Tyson")
