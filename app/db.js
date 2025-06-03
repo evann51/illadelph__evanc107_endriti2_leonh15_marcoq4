@@ -175,7 +175,8 @@ function getUsername(ID){
         console.error(err.message);
       } else{
         console.log("Username for ID " + ID + ": " + JSON.stringify(user[0].username));
-        return JSON.stringify(user[0].username);
+        fin = JSON.stringify(user[0].username);
+        return fin;
       }
     })
   });
@@ -195,7 +196,8 @@ function getUserID(username){
       } else{
         console.log("two");
         console.log("ID for username " + username + ": " + JSON.stringify(user[0].userID));
-        return JSON.stringify(user[0].userID);
+        fin = JSON.stringify(user[0].userID);
+        return fin;
       }
     })
   });
@@ -231,7 +233,8 @@ function getPassword(ID){
         console.error(err.message);
       } else{
         console.log("User password for ID " + ID + ": " + JSON.stringify(user[0].password));
-        return JSON.stringify(username[0].password);
+        fin = JSON.stringify(user[0].password);
+        return fin;
       }
     })
   });
@@ -249,7 +252,8 @@ function getProfilePicture(ID){
         console.error(err.message);
       } else{
         console.log("User PFP for ID " + ID + ": " + JSON.stringify(user[0].profilePicture));
-        return JSON.stringify(username[0].profilePicture);
+        fin = JSON.stringify(user[0].profilePicture);
+        return fin;
       }
     })
   });
@@ -267,7 +271,8 @@ function getProfileBanner(ID){
         console.error(err.message);
       } else{
         console.log("User banner for ID " + ID + ": " + JSON.stringify(user[0].profileBanner));
-        return JSON.stringify(username[0].profileBanner);
+        fin = JSON.stringify(user[0].profileBanner);
+        return fin;
       }
     })
   });
@@ -304,7 +309,8 @@ function getPost(ID){
         console.error(err.message);
       } else{
         console.log("Post for ID " + ID + ": " + JSON.stringify(dweet[0].post));
-        return JSON.stringify(dweet[0].post);
+        fin = JSON.stringify(dweet[0].post);
+        return fin;
       }
     })
   });
@@ -322,7 +328,8 @@ function getmedia0(ID){
         console.error(err.message);
       } else{
         console.log("Media0 for ID " + ID + ": " + JSON.stringify(dweet[0].media0));
-        return JSON.stringify(dweet[0].media0);
+        fin = JSON.stringify(dweet[0].media0);
+        return fin;
       }
     })
   });
@@ -340,7 +347,8 @@ function getmedia1(ID){
         console.error(err.message);
       } else{
         console.log("Media1 for ID " + ID + ": " + JSON.stringify(dweet[0].media1));
-        return JSON.stringify(dweet[0].media1);
+        fin = JSON.stringify(dweet[0].media1);
+        return fin;
       }
     })
   });
@@ -358,7 +366,8 @@ function getmedia2(ID){
         console.error(err.message);
       } else{
         console.log("Media2 for ID " + ID + ": " + JSON.stringify(dweet[0].media2));
-        return JSON.stringify(dweet[0].media2);
+        fin = JSON.stringify(dweet[0].media2);
+        return fin;
       }
     })
   });
@@ -376,7 +385,8 @@ function getmedia3(ID){
         console.error(err.message);
       } else{
         console.log("Media3 for ID " + ID + ": " + JSON.stringify(dweet[0].media3));
-        return JSON.stringify(dweet[0].media3);
+        fin = JSON.stringify(dweet[0].media3);
+        return fin;
       }
     })
   });
@@ -394,7 +404,8 @@ function getPoster(ID){
         console.error(err.message);
       } else{
         console.log("Poster for ID " + ID + ": " + JSON.stringify(dweet[0].poster));
-        return JSON.stringify(dweet[0].poster);
+        fin = JSON.stringify(dweet[0].poster);
+        return fin;
       }
     })
   });
@@ -412,7 +423,8 @@ function getPostRepliedTo(ID){
         console.error(err.message);
       } else{
         console.log("Post Replied To for ID " + ID + ": " + JSON.stringify(dweet[0].postRepliedTo));
-        return JSON.stringify(dweet[0].postRepliedTo);
+        fin = JSON.stringify(dweet[0].postRepliedTo);
+        return fin;
       }
     })
   });
@@ -422,8 +434,8 @@ function testerMethod(){
   createTable();
   addUser("Tyson", "spark_of_humanity", "Brandt", "tysonbrandt.jpg", "");
   addUser("Elli", "dawarden", "Verdandi", "krow.png", "timeaftertime.jpg");
-  addPost("New phone. who dis?", null, null, null, null, 0, null);
-  addPost("This isn't a new phone, idiot.", "facepalm.gif", null, null, null, 1, 0);
+  //addPost("New phone. who dis?", null, null, null, null, 0, null);
+  //addPost("This isn't a new phone, idiot.", "facepalm.gif", null, null, null, 1, 0);
   allUserData();
   //allDweetData();
   //getUsername(0);
