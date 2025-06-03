@@ -90,7 +90,8 @@
         .footer.light-mode a {
             color: #000000;
         }
-
+<a href="/login" class="bg-white border border-black text-white px-4 py-2 rounded-full hover:bg-gray-300 block text-center">Login</a>
+                <a href="/register" class="bg-white border border-black text-white px-4 py-2 rounded-full hover:bg-gray-300 block text-center">Register</a>
         /* Dark Mode */
         body.dark-mode {
             background-color: #121212;
@@ -173,11 +174,15 @@
                 <a href="#" class="block px-4 py-2 hover:bg-gray-100 rounded-full" onclick="setMode('light')">Light</a>
                 <a href="#" class="block px-4 py-2 hover:bg-gray-100 rounded-full" onclick="setMode('dark')">Dark</a>
             </div>
-          </div>
-                <a href="/profile" class="bg-white border border-black text-black px-4 py-2 rounded-full hover:bg-gray-300 block text-center">Profile</a>
-                <a href="/logout" class="bg-white border border-black text-white px-4 py-2 rounded-full hover:bg-gray-300 block text-center">Logout</a>
-                <a href="/login" class="bg-white border border-black text-white px-4 py-2 rounded-full hover:bg-gray-300 block text-center">Login</a>
+          </div><a href="/login" class="bg-white border border-black text-white px-4 py-2 rounded-full hover:bg-gray-300 block text-center">Login</a>
                 <a href="/register" class="bg-white border border-black text-white px-4 py-2 rounded-full hover:bg-gray-300 block text-center">Register</a>
+            <% if (user){ %>
+              <a href="/profile" class="bg-white border border-black text-black px-4 py-2 rounded-full hover:bg-gray-300 block text-center">Profile</a>
+              <a href="/logout" class="bg-white border border-black text-white px-4 py-2 rounded-full hover:bg-gray-300 block text-center">Logout</a>
+            <%} else{%>
+              <a href="/login" class="bg-white border border-black text-white px-4 py-2 rounded-full hover:bg-gray-300 block text-center">Login</a>
+              <a href="/register" class="bg-white border border-black text-white px-4 py-2 rounded-full hover:bg-gray-300 block text-center">Register</a>
+            <% } %>
         </div>
     </nav>
 
