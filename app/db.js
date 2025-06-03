@@ -8,7 +8,7 @@ function createTable(){
     } else {
       console.log('Connected to the database');
     }
-    db.run("CREATE TABLE IF NOT EXISTS userData (userID INTEGER PRIMARY KEY, username TEXT NOT NULL, userHandle TEXT UNIQUE NOT NULL, password TEXT NOT NULL, profilePicture TEXT, profileBanner TEXT)");
+    db.run("CREATE TABLE IF NOT EXISTS userData (userID INTEGER PRIMARY KEY, username TEXT UNIQUE NOT NULL, userHandle TEXT UNIQUE NOT NULL, password TEXT NOT NULL, profilePicture TEXT, profileBanner TEXT)");
     db.run("CREATE TABLE IF NOT EXISTS dweetData (dweetID INTEGER PRIMARY KEY, post TEXT NOT NULL, media0 TEXT, media1 TEXT, media2 TEXT, media3 TEXT, poster INTEGER NOT NULL, postRepliedTo INTEGER)");
     db.all("PRAGMA table_info(dweetData)", [], (err, rows) =>{
       if (err) {
@@ -189,7 +189,8 @@ function getUserID(username){
     } else {
       console.log('Connected to the database');
     }
-    db.all(`SELECT userID FROM userData where username = ${username}`, (err, user) => {
+
+    db.all(`SELECT userID FROM userData where username = '${username}'`, (err, user) => {
       if (err) {
         console.log("one");
         console.error(err.message);
@@ -438,9 +439,9 @@ function testerMethod(){
   //addPost("This isn't a new phone, idiot.", "facepalm.gif", null, null, null, 1, 0);
   allUserData();
   //allDweetData();
-  //getUsername(0);
+  console.log(0);
   //getPost(0);
-  getUserID("Tyson");
+  //getUserID("tyson");
   //changeUsername(0, "Tyson")
 }
 
@@ -468,5 +469,5 @@ module.exports = {
   getmedia3,
   getPoster,
   getPostRepliedTo,
-  getID
+  getUserID
 };
