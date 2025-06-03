@@ -8,7 +8,7 @@ function createTable(){
     } else {
       console.log('Connected to the database');
     }
-    db.run("CREATE TABLE IF NOT EXISTS userData (userID INTEGER PRIMARY KEY, username TEXT UNIQUE NOT NULL, userHandle TEXT UNIQUE NOT NULL, password TEXT NOT NULL, profilePicture TEXT, profileBanner TEXT)");
+    db.run("CREATE TABLE IF NOT EXISTS userData (userID INTEGER PRIMARY KEY, username TEXT UNIQUE NOT NULL, password TEXT NOT NULL, profilePicture TEXT, profileBanner TEXT)");
     db.run("CREATE TABLE IF NOT EXISTS dweetData (dweetID INTEGER PRIMARY KEY, post TEXT NOT NULL, media0 TEXT, media1 TEXT, media2 TEXT, media3 TEXT, poster INTEGER NOT NULL, postRepliedTo INTEGER)");
     db.all("PRAGMA table_info(dweetData)", [], (err, rows) =>{
       if (err) {
@@ -23,7 +23,7 @@ function createTable(){
   });
 };
 
-function addUser(username, userHandle, password, profilePicture, profileBanner){
+function addUser(username, password, profilePicture, profileBanner){
   const db = new sqlite3.Database('./dwitter.db', (err) => {
     if (err) {
       console.error('Error connecting to the database:', err.message);
@@ -41,7 +41,7 @@ function addUser(username, userHandle, password, profilePicture, profileBanner){
       }
       //console.log("Column: " + Object.keys(column).length);
       //console.log("Variable num: " + num);
-      db.run("INSERT INTO userData (userID, username, userHandle, password, profilePicture, profileBanner) VALUES (?, ?, ?, ?, ?, ?)", [num, username, userHandle, password, profilePicture, profileBanner], function(err) {
+      db.run("INSERT INTO userData (userID, username, password, profilePicture, profileBanner) VALUES (?, ?, ?, ?, ?)", [num, username, password, profilePicture, profileBanner], function(err) {
         if (err) {
           return console.error(err.message);
         }
@@ -433,13 +433,13 @@ function getPostRepliedTo(ID){
 
 function testerMethod(){
   createTable();
-  addUser("Tyson", "spark_of_humanity", "Brandt", "tysonbrandt.jpg", "");
-  addUser("Elli", "dawarden", "Verdandi", "krow.png", "timeaftertime.jpg");
+  addUser("Tyson", "Brandt", "tysonbrandt.jpg", "");
+  addUser("Elli", "Verdandi", "krow.png", "timeaftertime.jpg");
   //addPost("New phone. who dis?", null, null, null, null, 0, null);
   //addPost("This isn't a new phone, idiot.", "facepalm.gif", null, null, null, 1, 0);
   allUserData();
   //allDweetData();
-  console.log(0);
+  console.log(getUserID("Elli"));
   //getPost(0);
   //getUserID("tyson");
   //changeUsername(0, "Tyson")
