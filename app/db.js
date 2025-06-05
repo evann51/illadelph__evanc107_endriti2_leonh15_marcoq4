@@ -163,22 +163,29 @@ function allUserData(){
   });
 }
 
-function getUsername(ID){
+function getUsername(userID, callback) {
   const db = new sqlite3.Database('./dwitter.db', (err) => {
     if (err) {
       console.error('Error connecting to the database:', err.message);
-    } else {
-      console.log('Connected to the database');
+      return callback(err);
     }
-    db.all(`SELECT username FROM userData where userID = ${ID}`, (err, user) => {
+
+    const sql = `SELECT * FROM userData WHERE userID = ?`;
+    db.get(sql, [userID], (err, user) => {
+      db.close();
       if (err) {
-        console.error(err.message);
-      } else{
-        console.log("Username for ID " + ID + ": " + JSON.stringify(user[0].username));
-        fin = JSON.stringify(user[0].username);
-        return fin;
+        console.error('Database query error:', err.message);
+        return callback(err);
       }
-    })
+
+      if (user) {
+        console.log(`Found user ${userID}: ${JSON.stringify(user.username)}`);
+        return callback(null, user.username);
+      } else {
+        console.log(`No user found for username: ${userID}`);
+        return callback(null, null);
+      }
+    });
   });
 }
 
@@ -198,8 +205,8 @@ function getUserID(username, callback) {
       }
 
       if (user) {
-        console.log(`Found user ${username}: ${JSON.stringify(user)}`);
-        return callback(null, user);
+        console.log(`Found user ${username}: ${JSON.stringify(user.userID)}`);
+        return callback(null, user.userID);
       } else {
         console.log(`No user found for username: ${username}`);
         return callback(null, null);
@@ -208,40 +215,29 @@ function getUserID(username, callback) {
   });
 }
 
-function getUserHandle(ID){
+function getPassword(userID, callback) {
   const db = new sqlite3.Database('./dwitter.db', (err) => {
     if (err) {
       console.error('Error connecting to the database:', err.message);
-    } else {
-      console.log('Connected to the database');
+      return callback(err);
     }
-    db.all(`SELECT userHandle FROM userData where userID = ${ID}`, (err, user) => {
-      if (err) {
-        console.error(err.message);
-      } else{
-        console.log("User handle for ID " + ID + ": " + JSON.stringify(user[0].userHandle));
-        return JSON.stringify(username[0].userHandle);
-      }
-    })
-  });
-}
 
-function getPassword(ID){
-  const db = new sqlite3.Database('./dwitter.db', (err) => {
-    if (err) {
-      console.error('Error connecting to the database:', err.message);
-    } else {
-      console.log('Connected to the database');
-    }
-    db.all(`SELECT password FROM userData where userID = ${ID}`, (err, user) => {
+    const sql = `SELECT * FROM userData WHERE userID = ?`;
+    db.get(sql, [userID], (err, user) => {
+      db.close();
       if (err) {
-        console.error(err.message);
-      } else{
-        console.log("User password for ID " + ID + ": " + JSON.stringify(user[0].password));
-        fin = JSON.stringify(user[0].password);
-        return fin;
+        console.error('Database query error:', err.message);
+        return callback(err);
       }
-    })
+
+      if (user) {
+        console.log(`Found user ${userID}: ${JSON.stringify(user.password)}`);
+        return callback(null, user.password);
+      } else {
+        console.log(`No user found for username: ${userID}`);
+        return callback(null, null);
+      }
+    });
   });
 }
 
@@ -443,9 +439,27 @@ function testerMethod(){
   //addPost("This isn't a new phone, idiot.", "facepalm.gif", null, null, null, 1, 0);
   allUserData();
   //allDweetData();
-  //console.log(getUserID("Elli"));
-  //getPost(0);
-  //getUserID("tyson");
+  getUserID("Elli", (err, userID) => {
+    if (err) {
+      console.error("Failed to get username:", err);
+    } else {
+      console.log("UserID:", userID);
+    }
+  });
+  getUsername(0, (err, username) => {
+    if (err) {
+      console.error("Failed to get username:", err);
+    } else {
+      console.log("Username:", username);
+    }
+  });
+  getPassword(0, (err, password) => {
+    if (err) {
+      console.error("Failed to get username:", err);
+    } else {
+      console.log("Password:", password);
+    }
+  });
   //changeUsername(0, "Tyson")
 }
 
@@ -461,7 +475,6 @@ module.exports = {
   changeProfileBanner,
   allUserData,
   getUsername,
-  getUserHandle,
   getPassword,
   getProfilePicture,
   getProfileBanner,
