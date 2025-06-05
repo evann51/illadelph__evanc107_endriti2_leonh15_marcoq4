@@ -100,6 +100,7 @@ function changeProfileBanner(ID, newProfileBanner) {
 }
 
 function addPost(post, media0, media1, media2, media3, poster, postRepliedTo){
+  console.log("EEEEEE")
   const db = new sqlite3.Database('./dwitter.db', (err) => {
     if (err) {
       console.error('Error connecting to the database:', err.message);
@@ -121,7 +122,7 @@ function addPost(post, media0, media1, media2, media3, poster, postRepliedTo){
         if (err) {
           return console.error(err.message);
         }
-        console.log("A row has been inserted with rowid ${this.lastID}");
+        //console.log("A row has been inserted with rowid ${this.lastID}");
       });
     });
     db.close();
@@ -571,6 +572,18 @@ function getUser(username, callback) {
   });
 }
 
+function getRecentPosts(callback) {
+  const db = new sqlite3.Database('./dwitter.db');
+  db.all(
+    `SELECT * FROM dweetData ORDER BY dweetID DESC LIMIT 10`, 
+    (err, rows) => {
+      db.close();
+      callback(err, rows);
+    }
+  );
+}
+
+
 
 testerMethod();
 
@@ -595,5 +608,6 @@ module.exports = {
   getPoster,
   getPostRepliedTo,
   getUserID,
-  getUser
+  getUser,
+  getRecentPosts
 };
