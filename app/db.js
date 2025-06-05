@@ -230,6 +230,7 @@ function getProfilePicture(userID, callback) {
     if (err) {
       console.error('Error connecting to the database:', err.message);
       return callback(err);
+
     }
 
     const sql = `SELECT * FROM userData WHERE userID = ?`;
@@ -243,6 +244,7 @@ function getProfilePicture(userID, callback) {
       if (user) {
         console.log(`Found user ${userID}: ${JSON.stringify(user.profilePicture)}`);
         return callback(null, user.profilePicture);
+
       } else {
         console.log(`No user found for username: ${userID}`);
         return callback(null, null);
@@ -256,6 +258,7 @@ function getProfileBanner(userID, callback){
     if (err) {
       console.error('Error connecting to the database:', err.message);
       return callback(err);
+
     }
 
     const sql = `SELECT * FROM userData WHERE userID = ?`;
@@ -264,6 +267,9 @@ function getProfileBanner(userID, callback){
       if (err) {
         console.error('Database query error:', err.message);
         return callback(err);
+
+
+
       }
 
       if (user) {
@@ -277,7 +283,7 @@ function getProfileBanner(userID, callback){
   });
 }
 
-//Accessor Methods for Dweet Data
+//Accessor Methods for Dweet DataMore actions
 function allDweetData(){
   const db = new sqlite3.Database('./dwitter.db', (err) => {
     if (err) {
@@ -301,6 +307,7 @@ function getPost(dweetID, callback){
     if (err) {
       console.error('Error connecting to the database:', err.message);
       return callback(err);
+
     }
 
     const sql = `SELECT * FROM dweetData WHERE dweetID = ?`;
@@ -309,6 +316,9 @@ function getPost(dweetID, callback){
       if (err) {
         console.error('Database query error:', err.message);
         return callback(err);
+
+
+
       }
 
       if (dweet) {
@@ -327,6 +337,7 @@ function getmedia0(dweetID, callback){
     if (err) {
       console.error('Error connecting to the database:', err.message);
       return callback(err);
+
     }
 
     const sql = `SELECT * FROM dweetData WHERE dweetID = ?`;
@@ -335,6 +346,9 @@ function getmedia0(dweetID, callback){
       if (err) {
         console.error('Database query error:', err.message);
         return callback(err);
+
+
+
       }
 
       if (dweet) {
@@ -353,6 +367,7 @@ function getmedia1(dweetID, callback){
     if (err) {
       console.error('Error connecting to the database:', err.message);
       return callback(err);
+
     }
 
     const sql = `SELECT * FROM dweetData WHERE dweetID = ?`;
@@ -361,6 +376,9 @@ function getmedia1(dweetID, callback){
       if (err) {
         console.error('Database query error:', err.message);
         return callback(err);
+
+
+
       }
 
       if (dweet) {
@@ -379,6 +397,7 @@ function getmedia2(dweetID, callback){
     if (err) {
       console.error('Error connecting to the database:', err.message);
       return callback(err);
+
     }
 
     const sql = `SELECT * FROM dweetData WHERE dweetID = ?`;
@@ -387,6 +406,9 @@ function getmedia2(dweetID, callback){
       if (err) {
         console.error('Database query error:', err.message);
         return callback(err);
+
+
+
       }
 
       if (dweet) {
@@ -405,6 +427,7 @@ function getmedia3(dweetID, callback){
     if (err) {
       console.error('Error connecting to the database:', err.message);
       return callback(err);
+
     }
 
     const sql = `SELECT * FROM dweetData WHERE dweetID = ?`;
@@ -413,6 +436,9 @@ function getmedia3(dweetID, callback){
       if (err) {
         console.error('Database query error:', err.message);
         return callback(err);
+
+
+
       }
 
       if (dweet) {
@@ -431,6 +457,7 @@ function getPoster(dweetID, callback){
     if (err) {
       console.error('Error connecting to the database:', err.message);
       return callback(err);
+
     }
 
     const sql = `SELECT * FROM dweetData WHERE dweetID = ?`;
@@ -439,6 +466,9 @@ function getPoster(dweetID, callback){
       if (err) {
         console.error('Database query error:', err.message);
         return callback(err);
+
+
+
       }
 
       if (dweet) {
@@ -457,6 +487,7 @@ function getPostRepliedTo(dweetID, callback){
     if (err) {
       console.error('Error connecting to the database:', err.message);
       return callback(err);
+
     }
 
     const sql = `SELECT * FROM dweetData WHERE dweetID = ?`;
@@ -465,6 +496,9 @@ function getPostRepliedTo(dweetID, callback){
       if (err) {
         console.error('Database query error:', err.message);
         return callback(err);
+
+
+
       }
 
       if (dweet) {
@@ -478,10 +512,11 @@ function getPostRepliedTo(dweetID, callback){
   });
 }
 
+
 function testerMethod(){
   createTable();
-  addUser("Tyson", "Brandt", "tysonbrandt.jpg", "");
-  addUser("Elli", "Verdandi", "krow.png", "timeaftertime.jpg");
+  // addUser("Tyson", "Brandt", "tysonbrandt.jpg", "");
+  // addUser("Elli", "Verdandi", "krow.png", "timeaftertime.jpg");
   //addPost("New phone. who dis?", null, null, null, null, 0, null);
   //addPost("This isn't a new phone, idiot.", "facepalm.gif", null, null, null, 1, 0);
   allUserData();
@@ -507,15 +542,35 @@ function testerMethod(){
       console.log("Password:", password);
     }
   });
-  getPost(0, (err, post) => {
-    if (err) {
-      console.error("Failed to get username:", err);
-    } else {
-      console.log("Password:", post);
-    }
-  });
   //changeUsername(0, "Tyson")
 }
+
+function getUser(username, callback) {
+  const db = new sqlite3.Database('./dwitter.db', (err) => {
+    if (err) {
+      console.error('Error connecting to the database:', err.message);
+      return callback(err);
+    }
+
+    const sql = `SELECT * FROM userData WHERE username = ?`;
+    db.get(sql, [username], (err, user) => {
+      db.close();
+      if (err) {
+        console.error('Database query error:', err.message);
+        return callback(err);
+      }
+
+      if (user) {
+        console.log(`Found user ${username}: ${JSON.stringify(user)}`);
+        return callback(null, user);
+      } else {
+        console.log(`No user found for username: ${username}`);
+        return callback(null, null);
+      }
+    });
+  });
+}
+
 
 testerMethod();
 
@@ -539,5 +594,6 @@ module.exports = {
   getmedia3,
   getPoster,
   getPostRepliedTo,
-  getUserID
+  getUserID,
+  getUser
 };
