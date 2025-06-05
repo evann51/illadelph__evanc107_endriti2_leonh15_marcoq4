@@ -521,27 +521,27 @@ function testerMethod(){
   //addPost("This isn't a new phone, idiot.", "facepalm.gif", null, null, null, 1, 0);
   allUserData();
   //allDweetData();
-  getUserID("Elli", (err, userID) => {
-    if (err) {
-      console.error("Failed to get username:", err);
-    } else {
-      console.log("UserID:", userID);
-    }
-  });
-  getUsername(0, (err, username) => {
-    if (err) {
-      console.error("Failed to get username:", err);
-    } else {
-      console.log("Username:", username);
-    }
-  });
-  getPassword(0, (err, password) => {
-    if (err) {
-      console.error("Failed to get username:", err);
-    } else {
-      console.log("Password:", password);
-    }
-  });
+  // getUserID("Elli", (err, userID) => {
+  //   if (err) {
+  //     console.error("Failed to get username:", err);
+  //   } else {
+  //     console.log("UserID:", userID);
+  //   }
+  // });
+  // getUsername(0, (err, username) => {
+  //   if (err) {
+  //     console.error("Failed to get username:", err);
+  //   } else {
+  //     console.log("Username:", username);
+  //   }
+  // });
+  // getPassword(0, (err, password) => {
+  //   if (err) {
+  //     console.error("Failed to get username:", err);
+  //   } else {
+  //     console.log("Password:", password);
+  //   }
+  // });
   //changeUsername(0, "Tyson")
 }
 
