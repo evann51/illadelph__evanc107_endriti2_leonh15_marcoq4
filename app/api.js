@@ -1,6 +1,8 @@
 const { GoogleGenAI } = require("@google/genai");
+const fs = require('fs');
+const api_key = fs.readFileSync("keys/Gemini_key.txt", "utf8")
+const ai = new GoogleGenAI({ apiKey: api_key});
 
-const ai = new GoogleGenAI({ apiKey: "AIzaSyAizreIXJ-IQ7HeczrWTqYYqoh_HpCpknA" });
 async function main(character, text) {
   let desc = "";
   if (character == 0){
@@ -14,4 +16,4 @@ async function main(character, text) {
   return(response.text)
 }
 
-//main(0, "GSP is the GOAT of the UFC");
+//main(0, "");
