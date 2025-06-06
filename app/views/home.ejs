@@ -60,6 +60,13 @@
         #buttons a{
           color: black;
         }
+		
+		#pfp {
+			
+		}
+		#posts{
+		
+		}
 
         /* Light Mode */
         body.light-mode {
@@ -93,6 +100,13 @@
         .footer.light-mode a {
             color: #000000;
         }
+		
+		body.light-mode #posts{
+			filter: invert(1);
+		}
+		body.light-mode #pfp{
+			filter: invert(1);
+		}
 
         /* Dark Mode */
         body.dark-mode {
@@ -128,6 +142,7 @@
         body.dark-mode img {
             filter: invert(0);
         }
+		
 
         body.dark-mode input {
             color: #191c1c;
@@ -216,7 +231,7 @@
 
     <!-- main stuff -->
     <div class="ml-64 px-4 mt-40">
-        <img 
+        <img id="pfp"
             src="https://github.com/identicons/<%= (user && user.username ? user.username.substring(0, 7) : 'guest') %>.png" 
             alt="You" 
             class="w-[100px] h-[100px] object-cover !invert-0 mx-auto -m-30"
@@ -229,7 +244,7 @@
                     <div class="flex justify-between items-center mb-2">
                         <div class="flex items-center gap-2">
                             <% if (post.media1) { %>
-                            <img src="<%= post.media1 %>" alt="Profile Picture" class="w-8 h-8 rounded-full object-cover relative z-0 inline-block"  />
+                            <img id="posts" src="<%= post.media1 %>" alt="Profile Picture" class="w-8 h-8 rounded-full object-cover relative z-0 inline-block"  />
                             <% } else { %>
                             <!-- fallback icon or empty placeholder if no media1 -->
                             <div class="w-8 h-8 rounded-full bg-gray-300 dark:bg-gray-700"></div>
