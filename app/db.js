@@ -521,7 +521,7 @@ function testerMethod(){
   //addPost("New phone. who dis?", null, null, null, null, 0, null);
   //addPost("This isn't a new phone, idiot.", "facepalm.gif", null, null, null, 1, 0);
   allUserData();
-  //allDweetData();
+  allDweetData();
   // getUserID("Elli", (err, userID) => {
   //   if (err) {
   //     console.error("Failed to get username:", err);
@@ -544,6 +544,7 @@ function testerMethod(){
   //   }
   // });
   //changeUsername(0, "Tyson")
+
 }
 
 function getUser(username, callback) {
@@ -572,10 +573,37 @@ function getUser(username, callback) {
   });
 }
 
+function getAllReplies(postRepliedTo, callback) {
+  const db = new sqlite3.Database('./dwitter.db', (err) => {
+    if (err) {
+      console.error('Error connecting to the database:', err.message);
+      return callback(err);
+
+    }
+
+    const sql = `SELECT * FROM dweetData WHERE dweetID = ?`;
+    db.get(sql, [postRepliedTo], (err, dweets) => {
+      db.close();
+      if (err) {
+        console.error('Database query error:', err.message);
+        return callback(err);
+      }
+
+      if (dweets) {
+        console.log(`Found dweet ${dweetID}: ${JSON.stringify(dweets)}`);
+        return callback(null, dweets);
+      } else {
+        console.log(`No user found for dweet: ${dweetID}`);
+        return callback(null, null);
+      }
+    });
+  });
+}
+
 function getRecentPosts(callback) {
   const db = new sqlite3.Database('./dwitter.db');
   db.all(
-    `SELECT * FROM dweetData ORDER BY dweetID DESC LIMIT 10`, 
+    `SELECT * FROM dweetData ORDER BY dweetID DESC LIMIT 10`,
     (err, rows) => {
       db.close();
       callback(err, rows);
