@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <title> D </title>
     <link rel="icon" type="image/x-icon" href="/images/logo.jpg">
+    <link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet" />
+
     <script src="https://cdn.tailwindcss.com"></script>
 
     <!--css -->
@@ -11,212 +13,237 @@
 
     <!-- Additional Styles -->
     <style>
-      body {
-          transition: background-color 0.3s, color 0.3s;
-      }
-      /* Base Styles */
-      .footer {
-        position: fixed;
-        left: 0;
-        bottom: 0;
-        width: 100%;
-        text-align: center;
-      }
+        /* Base Styles */
+        body {
+            font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .footer {
+          position: fixed;
+          left: 0;
+          bottom: 0;
+          width: 100%;
+          text-align: center;
+        }
 
 
-      /* Navbar and Footer Transitions */
-      .navbar, .footer {
-          transition: background-color 0.3s, color 0.3s;
-      }
+        /* Navbar and Footer Transitions */
+        .navbar, .footer {
+            transition: background-color 0.3s, color 0.3s;
+        }
 
-      img {
-        transition: filter 0.3s ease;
-      }
+        img {
+          transition: filter 0.3s ease;
+        }
 
-      .navbar a, .footer a {
-          transition: color 0.3s;
-      }
+        .navbar a, .footer a {
+            transition: color 0.3s;
+        }
 
-      /* Mode Switcher Styles */
-      #modeSwitcherMenu a {
-          color: #000000;
-      }
+        /* Mode Switcher Styles */
+        #modeSwitcherMenu a {
+            color: #000000;
+        }
 
-      #modeSwitcherMenu a:hover {
-          background-color: #f0f0f0;
-      }
+        #modeSwitcherMenu a:hover {
+            background-color: #f0f0f0;
+        }
 
-      #modeSwitcherBtn {
-          color: #000000;
-      }
+        #modeSwitcherBtn {
+            color: #000000;
+        }
 
-      #links a{
-        color: light-grey;
-      }
-      #buttons a{
-        color: black;
-      }
+        #links a{
+          color: light-grey;
+        }
+        #buttons a{
+          color: black;
+        }
 
-      /* Light Mode */
-      body.light-mode {
-          background-color: #F2F0EF;
-          color: #000000;
-      }
+        /* Light Mode */
+        body.light-mode {
+            background-color: #F2F0EF;
+            color: #000000;
+        }
 
-      body.light-mode textarea {
-          background-color: #F2F0EF;
-          color: #000000;
-          /* border: 1px solid ; */
-      }
+        body.light-mode textarea {
+            background-color: #F2F0EF;
+            color: #000000;
+            /* border: 1px solid ; */
+        }
 
-      body.light-mode img {
-          filter: invert(1);
-      }
+        body.light-mode img {
+            filter: invert(1);
+        }
 
-      .navbar.light-mode, .footer.light-mode {
-          background-color: #ffffff;
-          color: #000000;
-      }
+        .navbar.light-mode, .footer.light-mode {
+            background-color: #ffffff;
+            color: #000000;
+        }
 
-      .navbar.light-mode a {
-          color: #000000;
-      }
+        .navbar.light-mode a {
+            color: #000000;
+        }
 
-      .navbar.light-mode a:hover {
-          color: #555555;
-      }
+        .navbar.light-mode a:hover {
+            color: #555555;
+        }
 
-      .footer.light-mode a {
-          color: #000000;
-      }
+        .footer.light-mode a {
+            color: #000000;
+        }
 
-      /* Dark Mode */
-      body.dark-mode {
-          background-color: #121212;
-          color: #ffffff;
-      }
+        /* Dark Mode */
+        body.dark-mode {
+            background-color: #121212;
+            color: #ffffff;
+        }
 
-      .navbar.dark-mode, .footer.dark-mode {
-          background-color: #000000;
-          color: #ffffff;
-      }
+        .navbar.dark-mode, .footer.dark-mode {
+            background-color: #000000;
+            color: #ffffff;
+        }
 
-      .navbar.dark-mode #links {
-          color: white;
-      }
+        .navbar.dark-mode #links {
+            color: white;
+        }
 
-      .navbar.dark-mode #buttons {
-          color: yellow;
-      }
+        .navbar.dark-mode #buttons {
+            color: yellow;
+        }
 
-      .navbar.dark-mode. #bottons:hover {
-          color: grey;
-      }
+        .navbar.dark-mode #buttons:hover {
+            color: grey;
+        }
 
-      body.dark-mode #links {
-        color: blue;
-      }
+        body.dark-mode #links {
+          color: blue;
+        }
 
-      .footer.dark-mode a {
-          color: #ffffff;
-      }
+        .footer.dark-mode a {
+            color: #ffffff;
+        }
 
-      body.dark-mode img {
-          filter: invert(0);
-      }
+        body.dark-mode img {
+            filter: invert(0);
+        }
 
-      body.dark-mode input {
-          color: #191c1c;
-          background-color: #ffffff; /* Match the cyan background */
-          /* border-color: #000000;  Optional: accent color for the border */
-      }
+        body.dark-mode input {
+            color: #191c1c;
+            background-color: #ffffff; /* Match the cyan background */
+            /* border-color: #000000;  Optional: accent color for the border */
+        }
 
-      body.dark-mode h2 {
-          color: white;
-      }
-      body.dark-mode textarea {
-          background-color: #ffffff;
-          color: white;
-          /* border: 1px solid #555; */
-      }
+        body.dark-mode h2 {
+            color: white;
+        }
+        body.dark-mode textarea {
+            background-color: #ffffff;
+            color: white;
+            /* border: 1px solid #555; */
+        }
 
-      /* Additional Styles for Validation */
-      .valid {
-          color: green;
-      }
+        
+        /* Additional Styles for Validation */
+        .valid {
+            color: green;
+        }
 
-      .invalid {
-          color: red;
-      }
+        .invalid {
+            color: red;
+        }
     </style>
 </head>
 <body>
     <!-- Sidebar Navigation -->
     <nav class="navbar fixed left-0 top-0 h-full w-64 bg-white dark:bg-black shadow flex flex-col gap-4 p-6">
         <div id="links">
-            <a href="/" class="text-2xl font-bold mb-6 block">
-                <img src="/images/logo.jpg" width="40" height="40">
-            </a>
+            <div class="flex items-center mb-6 justify-between">
+                <a href="/" class="flex-shrink-0">
+                    <img src="/images/logo.jpg" width="40" height="40" class="logo-img"/>
+                </a>
+
+                <div class="flex items-center gap-2">
+                    <% if (user) { %>
+                        <a href="/profile" class="flex items-center justify-center rounded-lg overflow-hidden" style="width: 30px; height: 30px;">
+                            <img 
+                                src="https://github.com/identicons/<%= (user && user.username ? user.username.substring(0, 7) : 'guest') %>.png" 
+                                alt="Profile" 
+                                class="w-[30px] h-[30px] object-cover !invert-0"
+                            />
+                        </a>
+                    <% } %>
+                    <div class="relative flex items-center">
+                        <button id="settingsBtn" aria-haspopup="true" aria-expanded="false" class="flex-shrink-0 focus:outline-none">
+                            <img src="/images/settings.png" width="20" height="20" class="logo-img" />
+                        </button>
+                        <div id="settingsDropdown" class="hidden absolute top-0 left-full ml-2 w-32 bg-white dark:bg-black border border-gray-300 dark:border-gray-700 rounded shadow-md z-index: 9999 !important">
+                            <button class="w-full text-left px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-t" onclick="setMode('light')">Light Mode</button>
+                            <button class="w-full text-left px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-b" onclick="setMode('dark')">Dark Mode</button>
+                            <% if (user) { %><a href="/logout" class="block w-full text-left px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-800 text-red-600 dark:text-red-400 rounded-b">Logout</a><% } %>
+                        </div>
+                    </div>
+                </div>
+            </div> 
             <ul class="space-y-4">
                 <li><a href="/search" class="text-gray-600 dark:text-white hover:text-gray-800 ">Search</a></li>
                 <li><a href="/notis" class="text-gray-600 dark:text-white hover:text-gray-800">Notifications</a></li>
                 <li><a href="/dms" class="text-gray-600 dark:text-white hover:text-gray-800">Direct Messages</a></li>
             </ul>
         </div>
+
         <div id="buttons" class="space-y-4">
           <div class="relative">
-            <button id="modeSwitcherBtn" class="w-full border border-black bg-blue-400 dark:bg-blue-400 text-black dark:text-white px-4 py-2 rounded-full hover:bg-blue-500 dark:hover:bg-blue-500">
+            <!-- <button id="modeSwitcherBtn" class="w-full border border-black bg-blue-400 dark:bg-blue-400 text-black dark:text-white px-4 py-2 rounded-full hover:bg-blue-500 dark:hover:bg-blue-500">
                 Mode
             </button>
             <div id="modeSwitcherMenu" class="hidden absolute left-full ml-2 top-0 w-32 bg-white border border-black rounded-lg shadow-lg z-50">
                 <a href="#" class="block px-4 py-2 hover:bg-gray-100 rounded-full" onclick="setMode('light')">Light</a>
                 <a href="#" class="block px-4 py-2 hover:bg-gray-100 rounded-full" onclick="setMode('dark')">Dark</a>
-            </div>
+            </div> -->
           </div>
-            <% if (user){ %>
-              <a href="/profile" class="bg-white border border-black text-black px-4 py-2 rounded-full hover:bg-gray-300 block text-center">Profile</a>
-              <a href="/logout" class="bg-white border border-black text-white px-4 py-2 rounded-full hover:bg-gray-300 block text-center">Logout</a>
-            <%} else{%>
-              <a href="/login" class="bg-white border border-black text-white px-4 py-2 rounded-full hover:bg-gray-300 block text-center">Login</a>
-              <a href="/register" class="bg-white border border-black text-white px-4 py-2 rounded-full hover:bg-gray-300 block text-center">Register</a>
+            <% if (user != null){ %>
+                <a href="/create" class="bg-blue-500 text-white px-4 py-2 rounded-full block text-center" style="color: white !important;">Create</a>
+            <% } else { %>
+                <a href="/login" class="bg-white border border-black text-black px-4 py-2 rounded-full hover:bg-gray-300 block text-center">Login</a>
+                <a href="/register" class="bg-white border border-black text-black px-4 py-2 rounded-full hover:bg-gray-300 block text-center">Register</a>
             <% } %>
+
         </div>
     </nav>
 
 
-    <!-- Main Content -->
-    <div class="ml-64 px-4 mt-6">
-    </div>
+    <!-- main stuff -->
 
 
-    <!-- Footer -->
+
+
+
+
+    <!-- footter -->
     <footer class="footer bg-white shadow mt-8">
         <div class="container mx-auto px-4 py-6 text-center">
             &copy; D (witter)
         </div>
     </footer>
 
-    <!-- Scripts -->
+    <!-- scripts -->
     <script>
-        // Function to set the user mode
         function setMode(mode) {
-            // Remove existing mode classes
             document.body.classList.remove('light-mode', 'dark-mode');
             const navbar = document.querySelector('.navbar');
             const footer = document.querySelector('.footer');
             navbar.classList.remove('light-mode', 'dark-mode');
             footer.classList.remove('light-mode', 'dark-mode');
 
-            // Apply new mode
             if (mode === 'custom') {
-                // Load custom theme if it exists
                 const savedTheme = JSON.parse(localStorage.getItem('customTheme'));
                 if (savedTheme) {
                     document.documentElement.style.setProperty('--bg-color', savedTheme.bgColor);
                     document.documentElement.style.setProperty('--text-color', savedTheme.textColor);
                     document.documentElement.style.setProperty('--accent-color', savedTheme.accentColor);
                 } else {
-                    // If no custom theme is saved, default to light mode
                     setMode('light');
                     return;
                 }
@@ -225,34 +252,28 @@
                 navbar.classList.add(`${mode}-mode`);
                 footer.classList.add(`${mode}-mode`);
             }
-
-            // Save the mode to localStorage
             localStorage.setItem('mode', mode);
 
-            // Highlight the current mode in the dropdown menu
             const modeLinks = document.querySelectorAll('#modeSwitcherMenu a');
-            modeLinks.forEach(link => link.classList.remove('bg-blue-500', 'text-white')); // Remove highlight
+            modeLinks.forEach(link => link.classList.remove('bg-blue-500', 'text-white')); 
             const currentModeLink = document.querySelector(`#modeSwitcherMenu a[onclick="setMode('${mode}')"]`);
             if (currentModeLink) {
-                currentModeLink.classList.add('bg-blue-500', 'text-white'); // Add highlight
+                currentModeLink.classList.add('bg-blue-500', 'text-white'); 
             }
 
-            // Close the mode switcher menu
+
             document.getElementById('modeSwitcherMenu').classList.add('hidden');
         }
 
 
-        // Function to load the saved mode on page load
         function loadMode() {
             const savedMode = localStorage.getItem('mode') || 'dark'; // 'dark' is default
             setMode(savedMode);
         }
 
-        // Event listener to initialize theme on page load
         document.addEventListener('DOMContentLoaded', function() {
             loadMode();
 
-            // Toggle dropdown menu
             const modeSwitcherBtn = document.getElementById('modeSwitcherBtn');
             const modeSwitcherMenu = document.getElementById('modeSwitcherMenu');
 
@@ -261,10 +282,26 @@
                 modeSwitcherMenu.classList.toggle('hidden');
             });
 
-            // Close the dropdown when clicking outside
             document.addEventListener('click', function() {
                 modeSwitcherMenu.classList.add('hidden');
             });
+        });
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const settingsBtn = document.getElementById('settingsBtn');
+            const settingsDropdown = document.getElementById('settingsDropdown');
+
+            settingsBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const isHidden = settingsDropdown.classList.contains('hidden');
+            settingsDropdown.classList.toggle('hidden', !isHidden);
+            settingsBtn.setAttribute('aria-expanded', isHidden);
+        });
+
+        document.addEventListener('click', () => {
+            settingsDropdown.classList.add('hidden');
+            settingsBtn.setAttribute('aria-expanded', 'false');
+        });
         });
     </script>
 </body>
