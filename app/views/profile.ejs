@@ -215,7 +215,69 @@
 
 
     <!-- main stuff -->
+    <div class="ml-64 px-4 mt-40">
+        <img 
+            src="https://github.com/identicons/<%= (user && user.username ? user.username.substring(0, 7) : 'guest') %>.png" 
+            alt="You" 
+            class="w-[100px] h-[100px] object-cover !invert-0 mx-auto -m-30"
+        />
+        <h2 class="text-center text-2xl font-semibold mb-6 text-gray-700 dark:text-gray-300">your posts</h2>
+        <% if (posts && posts.length > 0) { %>
+            <section class="space-y-4">
+            <% posts.forEach(post => { %>
+                <div class="p-4 bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-lg shadow">
+                    <div class="flex justify-between items-center mb-2">
+                        <div class="flex items-center gap-2">
+                            <% if (post.media1) { %>
+                            <img src="<%= post.media1 %>" alt="Profile Picture" class="w-8 h-8 rounded-full object-cover relative z-0 inline-block"  />
+                            <% } else { %>
+                            <!-- fallback icon or empty placeholder if no media1 -->
+                            <div class="w-8 h-8 rounded-full bg-gray-300 dark:bg-gray-700"></div>
+                            <% } %>
+                            <span class="font-semibold text-gray-800 dark:text-gray-200"><%= post.poster %></span>
+                        </div>
+                        <span class="text-xs text-gray-500 dark:text-gray-400">#<%= post.dweetID %></span>
+                    </div>
 
+
+                    <p class="text-gray-700 dark:text-gray-300 whitespace-pre-line break-words"><%= post.post %></p>
+
+                    <!-- <% if (post.mediaUrl && post.mediaUrl.trim() !== '') { %>
+                    show media
+                    <% } else { %>
+                    <p>No media url</p>
+                    <% } %> -->
+
+
+                    <% if (post.media0) { %>
+
+                        <!-- <script>console.log("eeeeeeejajajaj")</script> -->
+                        <% if (post.media0.match(/\.(jpeg|jpg|gif|png)(\?.*)?$/i)) { %>
+                            <!-- <script>console.log("WHWHAHHHAHAHAH")</script> -->
+                            <img src="<%= post.media0 %>" alt="Media" class="rounded-lg mt-4 max-w-full h-auto" />
+                        <% } else if (post.media0.match(/\.(mp4|webm|ogg)(\?.*)?$/i)) { %>
+                            <video controls class="rounded-lg mt-4 max-w-full h-auto">
+                            <source src="<%= post.media0 %>" type="video/mp4">
+                            Your browser does not support the video tag.
+                            </video>
+                        <% } else { %>
+                            <a href="<%= post.media0 %>" target="_blank" class="text-blue-500 underline mt-4 block">
+                            View Media
+                            </a>
+                        <% } %>
+                    <% } %>
+                </div>
+            <% }) %>
+            <br>
+            <br>
+            </section>
+            <br>
+            <br>
+
+        <% } else { %>
+            <p class="text-gray-500 dark:text-gray-400">No posts yet.</p>
+        <% } %>
+    </div>
 
 
 
