@@ -1,13 +1,13 @@
-const CharacterAI = require('node_characterai');
-const characterAI = new CharacterAI();
+import { GoogleGenAI } from "@google/genai";
 
-(async() => {
-    await characterAI.authenticateAsGuest();
+const ai = new GoogleGenAI({ apiKey: "AIzaSyAizreIXJ-IQ7HeczrWTqYYqoh_HpCpknA" });
 
-    const characterId = "8_1NyR8w1dOXmI1uWaieQcd147hecbdIK7CeEAIrdJw" // Discord moderator
+async function main() {
+  const response = await ai.models.generateContent({
+    model: "gemini-2.0-flash",
+    contents: "Respond to this quote and everything I say as if you were a Twitter user trying to make people mad (do not give any explanations as to what you say. just respond): 'GSP is the GOAT of the UFC'",
+  });
+  console.log(response.text);
+}
 
-    const chat = await characterAI.createOrContinueChat(characterId);
-    const response = await chat.sendAndAwaitResponse('Hello discord mod!', true)
-
-    console.log(response);
-})();
+main();
