@@ -169,6 +169,61 @@ app.post('/create', (req, res) => {
   res.redirect('/');
 });
 
+app.get("/post", (req, res) => {
+  return res.redirect('/')
+})
+
+app.get('/post/:id', (req, res) => {
+  const postId = req.params.id;
+
+  db.getPost(postId, (err, post) => {
+    if (err || !post) {
+      return res.status(404).send('Post not found');
+    }
+
+    db.getAllReplies(postId, (err, replies) => {
+      if (err) {
+        return res.status(500).send('Error loading replies');
+      }
+
+      replies.sort((a, b) => a.dweetID - b.dweetID);
+
+      console.log("Post:", post);
+      res.render('post', { post, replies, user: req.session.user });
+    });
+  });
+});
+
+
+
+app.post('/post/:id', (req, res) => {
+  if (!req.session.user) {
+    return res.redirect('/login');
+  }
+  const postId = req.params.id;
+  const {post, mediaUrl,profileImageUrl } = req.body;
+  console.log("eeeePOSTPOSTPOST" + postId)
+  if(mediaUrl){
+    db.addPost(post,mediaUrl,profileImageUrl,null,null,req.session.user.username,postId, (err) => {
+      if (err) {
+        return res.status(500).send('Error saving reply');
+      }
+      res.redirect(`/post/${postId}`);
+    });
+  }
+  else{
+    db.addPost(post,null,profileImageUrl,null,null,req.session.user.username,postId, (err) => {
+      console.log("e")
+      if (err) {
+        return res.status(500).send('Error saving reply');
+      }
+
+      res.redirect(`/post/${postId}`);
+    });
+  }
+  res.redirect('/')
+});
+
 
 //helpies
 function hashPassword(password) {

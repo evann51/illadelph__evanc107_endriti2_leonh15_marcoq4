@@ -324,7 +324,7 @@ function getPost(dweetID, callback){
 
       if (dweet) {
         console.log(`Found dweet ${dweetID}: ${JSON.stringify(dweet.post)}`);
-        return callback(null, dweet.post);
+        return callback(null, dweet);
       } else {
         console.log(`No user found for dweet: ${dweetID}`);
         return callback(null, null);
@@ -578,38 +578,35 @@ function getAllReplies(postRepliedTo, callback) {
     if (err) {
       console.error('Error connecting to the database:', err.message);
       return callback(err);
-
     }
 
-    const sql = `SELECT * FROM dweetData WHERE dweetID = ?`;
-    db.get(sql, [postRepliedTo], (err, dweets) => {
+    const sql = `SELECT * FROM dweetData WHERE postRepliedTo = ?`;
+    db.all(sql, [postRepliedTo], (err, replies) => {
       db.close();
       if (err) {
         console.error('Database query error:', err.message);
         return callback(err);
       }
 
-      if (dweets) {
-        console.log(`Found dweet ${dweetID}: ${JSON.stringify(dweets)}`);
-        return callback(null, dweets);
-      } else {
-        console.log(`No user found for dweet: ${dweetID}`);
-        return callback(null, null);
-      }
+      console.log(`Found ${replies.length} replies to post ${postRepliedTo}`);
+      return callback(null, replies);
     });
   });
 }
 
+
+
 function getRecentPosts(callback) {
   const db = new sqlite3.Database('./dwitter.db');
   db.all(
-    `SELECT * FROM dweetData ORDER BY dweetID DESC LIMIT 10`,
+    `SELECT * FROM dweetData WHERE postRepliedTo IS NULL ORDER BY dweetID DESC LIMIT 10`,
     (err, rows) => {
       db.close();
       callback(err, rows);
     }
   );
 }
+
 
 function getPostsByPoster(posterID, callback) {
   const db = new sqlite3.Database('./dwitter.db', (err) => {
@@ -663,5 +660,6 @@ module.exports = {
   getUserID,
   getUser,
   getRecentPosts,
-  getPostsByPoster
+  getPostsByPoster,
+  getAllReplies
 };

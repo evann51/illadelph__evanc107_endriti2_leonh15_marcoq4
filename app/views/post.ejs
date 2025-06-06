@@ -94,7 +94,25 @@
             color: #000000;
         }
 
+        /* Light mode form background */
+        body.light-mode form#postForm {
+            background-color: #ececec;
+        }
+        
+        body.light-mode label[for="postContent"] {
+            color: #374151; /* gray-700 */
+        }
+
         /* Dark Mode */
+
+        body.dark-mode label[for="postContent"] {
+            color: #e5e7eb; /* gray-200 */
+        }
+
+        body.dark-mode form#postForm {
+            background-color: #242424;
+        }   
+
         body.dark-mode {
             background-color: #121212;
             color: #ffffff;
@@ -139,10 +157,11 @@
             color: white;
         }
         body.dark-mode textarea {
-            background-color: #ffffff;
-            color: white;
-            /* border: 1px solid #555; */
+            background-color: #575757; /* dark background */
+            color: #e2e8f0; /* light text */
+            border: 1px solid #4a5568; /* dark border */
         }
+
 
         
         /* Additional Styles for Validation */
@@ -173,12 +192,12 @@
                                 class="w-[30px] h-[30px] object-cover !invert-0"
                             />
                         </a>
-                    <% } %>
+                      <% } %>
                     <div class="relative flex items-center">
                         <button id="settingsBtn" aria-haspopup="true" aria-expanded="false" class="flex-shrink-0 focus:outline-none">
                             <img src="/images/settings.png" width="20" height="20" class="logo-img" />
                         </button>
-                        <div id="settingsDropdown" class="hidden absolute top-0 left-full ml-2 w-32 bg-white dark:bg-black border border-gray-300 dark:border-gray-700 rounded shadow-md z-index: 9999 !important">
+                        <div id="settingsDropdown" class="hidden absolute top-0 left-full ml-2 w-32 bg-white dark:bg-black border border-gray-300 dark:border-gray-700 rounded shadow-md z-50">
                             <button class="w-full text-left px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-t" onclick="setMode('light')">Light Mode</button>
                             <button class="w-full text-left px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-b" onclick="setMode('dark')">Dark Mode</button>
                             <% if (user) { %><a href="/logout" class="block w-full text-left px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-800 text-red-600 dark:text-red-400 rounded-b">Logout</a><% } %>
@@ -193,8 +212,8 @@
             </ul>
         </div>
 
-        <div id="buttons" class="space-y-4">
-          <div class="relative">
+        <!-- <div id="buttons" class="space-y-4">
+          <div class="relative"> -->
             <!-- <button id="modeSwitcherBtn" class="w-full border border-black bg-blue-400 dark:bg-blue-400 text-black dark:text-white px-4 py-2 rounded-full hover:bg-blue-500 dark:hover:bg-blue-500">
                 Mode
             </button>
@@ -202,86 +221,117 @@
                 <a href="#" class="block px-4 py-2 hover:bg-gray-100 rounded-full" onclick="setMode('light')">Light</a>
                 <a href="#" class="block px-4 py-2 hover:bg-gray-100 rounded-full" onclick="setMode('dark')">Dark</a>
             </div> -->
-          </div>
-            <% if (user != null){ %>
-                <a href="/create" class="bg-blue-500 text-white px-4 py-2 rounded-full block text-center" style="color: white !important;">Create</a>
-            <% } else { %>
-                <a href="/login" class="bg-white border border-black text-black px-4 py-2 rounded-full hover:bg-gray-300 block text-center">Login</a>
-                <a href="/register" class="bg-white border border-black text-black px-4 py-2 rounded-full hover:bg-gray-300 block text-center">Register</a>
-            <% } %>
-
-        </div>
     </nav>
 
 
     <!-- main stuff -->
-    <div class="ml-64 px-4 mt-40">
-        <img 
-            src="https://github.com/identicons/<%= (user && user.username ? user.username.substring(0, 7) : 'guest') %>.png" 
-            alt="You" 
-            class="w-[100px] h-[100px] object-cover !invert-0 mx-auto -m-30"
-        />
-        <h2 class="text-center text-2xl font-semibold mb-6 text-gray-700 dark:text-gray-300">your feed</h2>
-        <% if (posts && posts.length > 0) { %>
-            <section class="space-y-4">
-            <% posts.forEach(post => { %>
-                <div class="p-4 bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-lg shadow">
-                    <div class="flex justify-between items-center mb-2">
-                        <div class="flex items-center gap-2">
-                            <% if (post.media1) { %>
-                            <img src="<%= post.media1 %>" alt="Profile Picture" class="w-8 h-8 rounded-full object-cover relative z-0 inline-block"  />
-                            <% } else { %>
-                            <!-- fallback icon or empty placeholder if no media1 -->
-                            <div class="w-8 h-8 rounded-full bg-gray-300 dark:bg-gray-700"></div>
-                            <% } %>
-                            <span class="font-semibold text-gray-800 dark:text-gray-200"><%= post.poster %></span>
-                        </div>
-                        <span class="text-xs text-gray-500 dark:text-gray-400">#<%= post.dweetID %></span>
-                    </div>
 
-
-                    <p class="text-gray-700 dark:text-gray-300 whitespace-pre-line break-words"><%= post.post %></p>
-
-                    <!-- <% if (post.mediaUrl && post.mediaUrl.trim() !== '') { %>
-                    show media
-                    <% } else { %>
-                    <p>No media url</p>
-                    <% } %> -->
-
-
-                    <% if (post.media0) { %>
-
-                        <!-- <script>console.log("eeeeeeejajajaj")</script> -->
-                        <% if (post.media0.match(/\.(jpeg|jpg|gif|png)(\?.*)?$/i)) { %>
-                            <!-- <script>console.log("WHWHAHHHAHAHAH")</script> -->
-                            <img src="<%= post.media0 %>" alt="Media" class="rounded-lg mt-4 max-w-full h-auto" />
-                        <% } else if (post.media0.match(/\.(mp4|webm|ogg)(\?.*)?$/i)) { %>
-                            <video controls class="rounded-lg mt-4 max-w-full h-auto">
-                            <source src="<%= post.media0 %>" type="video/mp4">
-                            Your browser does not support the video tag.
-                            </video>
-                        <% } else { %>
-                            <a href="<%= post.media0 %>" target="_blank" class="text-blue-500 underline mt-4 block">
-                            View Media
-                            </a>
-                        <% } %>
-                    <% } %>
-                    <a href="/post/<%= post.dweetID %>" class="text-blue-500 underline mt-2 block">view thread</a>
-                    
-                </div>
-            <% }) %>
-            <br>
-            <br>
-            </section>
-            <br>
-            <br>
-
+<div class="mx-auto max-w-2xl px-4 py-6">
+    <!-- og post -->
+    <div class="bg-white dark:bg-gray-900 p-4 rounded-lg shadow mb-4 flex items-start gap-4">
+        <% if (post.media1) { %>
+            <img src="<%= post.media1 %>" alt="pfp" class="w-12 h-12 rounded-full object-cover" />
         <% } else { %>
-            <p class="text-gray-500 dark:text-gray-400">No posts yet.</p>
+            <div class="w-12 h-12 rounded-full bg-gray-300 dark:bg-gray-700"></div>
+        <% } %>
+        
+        <div>
+            <h2 class="text-lg font-semibold mb-1"><%= post.poster %></h2>
+            <p><%= post.post %></p>
+            <% if (post.media0) { %>
+            <img src="<%= post.media0 %>" class="mt-2 rounded" />
+            <% } %>
+        </div>
+    </div>
+
+
+    <!-- repplies -->
+    <div>
+        <h3 class="text-md font-semibold mb-2">Replies</h3>
+        <% if (replies && replies.length > 0) { %>
+            <% replies.forEach(reply => { %>
+            <div class="bg-gray-100 dark:bg-gray-800 p-3 rounded-lg shadow mb-2 flex items-start gap-3">
+                <% if (reply.media1) { %>
+                <img src="<%= reply.media1 %>" alt="pfp" class="w-10 h-10 rounded-full object-cover" />
+                <% } else { %>
+                <div class="w-10 h-10 rounded-full bg-gray-300 dark:bg-gray-700"></div>
+                <% } %>
+                <div>
+                <p class="font-semibold"><%= reply.poster %></p>
+                <p><%= reply.post %></p>
+                <% if (reply.media0) { %>
+                    <img src="<%= reply.media0 %>" class="mt-2 rounded" />
+                <% } %>
+                </div>
+            </div>
+            <% }) %>
+        <% } else { %>
+            <p class="text-gray-500 dark:text-gray-400">No replies yet.</p>
         <% } %>
     </div>
 
 
+    <!-- reply form -->
+    <form
+        id="postForm"
+        action="/post/<%= post.dweetID %>"
+        method="POST"
+        class="mt-6 p-6 rounded-lg shadow-md bg-white dark:bg-gray-900"
+    >
+        <input type="hidden" name="repliedTo" value="<%= post.dweetID %>">
+        <label for="postContent" class="block text-gray-700 dark:text-gray-200 font-semibold mb-2">
+        Write a reply
+        </label>
+        <textarea
+        id="postContent"
+        name="post"
+        rows="3"
+        maxlength="280"
+        placeholder="Reply here..."
+        class="w-full p-3 rounded-md border border-gray-300 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 text-gray-900 dark:text-gray-100 resize-none focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
+        required
+        ></textarea>
+        <label for="mediaUrl" class="block text-gray-700 dark:text-gray-200 font-semibold mt-4 mb-2">
+        Media URL (Image, GIF, or Video)
+        </label>
+        <input
+        type="url"
+        id="mediaUrl"
+        name="mediaUrl"
+        placeholder="https://example.com/image.jpg"
+        class="w-full p-3 rounded-md border border-gray-300 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
+        />
+
+        <input type="hidden" name="profileImageUrl" value="https://github.com/identicons/<%= (user && user.username ? user.username.substring(0, 7) : 'guest') %>.png" />
+
+        <div class="flex justify-between items-center mt-4">
+        <span id="charCount" class="text-sm text-gray-500 dark:text-gray-400">0 / 280</span>
+        <button type="submit" class="bg-blue-500 hover:bg-blue-600 text-white font-semibold px-4 py-2 rounded-full transition">
+            Reply
+        </button>
+        </div>
+    </form>
+    </div>
+
+
+
+
+
+
+    <script>
+    const textarea = document.getElementById('postContent');
+    const charCount = document.getElementById('charCount');
+
+    textarea.addEventListener('input', () => {
+        const currentLength = textarea.value.length;
+        charCount.textContent = `${currentLength} / 280`;
+        if (currentLength > 280) {
+        charCount.classList.add('text-red-600');
+        } else {
+        charCount.classList.remove('text-red-600');
+        }
+    });
+    </script>
 
 
 
