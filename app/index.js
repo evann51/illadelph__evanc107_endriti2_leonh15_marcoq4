@@ -36,13 +36,13 @@ app.get('/', (req, res) => {
       return res.render('home', { loggedIn: !!req.session.user, posts: [] });
     }
 
+    console.log('Posts from DB:', posts);
     res.render('home', {
       loggedIn: !!req.session.user,
       posts
     });
   });
 });
-
 
 app.post('/', (req, res) => {
   res.render('home', { loggedIn: !!req.session.user });
@@ -70,14 +70,17 @@ app.post('/register', async (req, res) => {
 });
 
 app.get('/login', (req, res) => {
+  if (req.session.user) {
+    return res.redirect('/');
+  }
   res.render('login', { error: null });
 });
 
 app.post('/login', (req, res) => {
   const {username, password} = req.body;
   if (req.session.user) {
-      return res.redirect('/');
-    }
+    return res.redirect('/');
+  }
   db.getUser(username, async (err, user) => {
     if(err){
       return res.render('login', { error: 'Database error' });
@@ -135,13 +138,22 @@ app.post('/create', (req, res) => {
     return res.redirect('/login');
   }
 
-  const { post } = req.body;
+  const { post, mediaUrl, profileImageUrl} = req.body;
   console.log("someones trying to post " + post)
-  if (!post || post.trim() == ' ') {
-    return res.render('create', { error: 'Nothing to post!' });
-  }
 
-  db.addPost(post, null, null, null, null, req.session.user.username, null);
+
+  console.log("Post submitted: ", post);
+  console.log("Media URL: ", mediaUrl);
+
+  if(mediaUrl){
+    db.addPost(post, mediaUrl, profileImageUrl, null, null, req.session.user.username, null);
+  }
+  else{
+    if (!post || post.trim() == ' ') {
+      return res.render('create', { error: 'Nothing to post!' });
+    }
+    db.addPost(post, null, profileImageUrl, null, null, req.session.user.username, null);
+  }
 
   res.redirect('/');
 });

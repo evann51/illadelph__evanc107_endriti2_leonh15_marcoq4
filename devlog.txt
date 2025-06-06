@@ -72,3 +72,7 @@ evanC -- 2025-06-05 19:57
 - known issues
 	- light and dark mode changes are not consistent with various webpages
 	- styles and other html/css work needs to be consistentialized
+
+evanC -- 2025-06-05 22:18
+	- media to posts
+	- pfps on posts
