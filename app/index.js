@@ -162,7 +162,11 @@ app.post('/create', (req, res) => {
         console.error('Failed to get most recent post after adding');
         return;
       }
-      scheduleBotReply(recentPost.dweetID);
+      const randomNum = Math.floor(Math.random() * (6 - 3 + 1)) + 3;
+      
+      for (let i = 0; i < randomNum; i++) {
+        scheduleBotReply(recentPost.dweetID);
+      }
     });
   }, 100);
 
@@ -294,6 +298,13 @@ function generateBotUsername() {
   const randomNoun = nouns[Math.floor(Math.random() * nouns.length)];
   const randomNumber = Math.floor(1000 + Math.random() * 9000); // 4-digit number
 
+  if (Math.random() < 0.3) {
+    if (Math.random() < 0.8) {
+      return `QuaffQuasimodo`
+    }
+    return `leonthelate`
+  }
+
   return `${randomAdj}${randomNoun}${randomNumber}`;
 }
 
@@ -302,3 +313,4 @@ function generateBotUsername() {
 app.listen(PORT, () => {
   console.log(`Server running at http://localhost:${PORT}`);
 });
+
