@@ -6,6 +6,7 @@ const bcrypt = require('bcrypt');
 const saltRounds = 5; //we can change this later idt it matters for our use tho
 
 const db = require('./db');
+const aipi = require('./api');
 const { hash } = require('crypto');
 
 const PORT = 5000;
@@ -111,23 +112,17 @@ app.get('/logout', (req, res) => {
 });
 
 app.get('/profile', (req, res) => {
-  if (!req.session.user) {
-    return res.redirect('/login');
-  }
+  if (!req.session.user) return res.redirect('/login');
 
-  posts = db.getPostsByPoster(req.session.user.userID, (err, pr) => {
+  db.getPostsByPoster(req.session.user.userID, (err, pr) => {
     if (err) {
       console.error(err);
       return res.render('home', { loggedIn: !!req.session.user, posts: [] });
     }
-
-    if(pr){
-      res.render('profile', { user: req.session.user, pr});
-    }
-  })
-
-  res.render('profile', { user: req.session.user, posts: []});
+    res.render('profile', { user: req.session.user, posts: pr || [] });
+  });
 });
+
 
 app.get('/notis', (req, res) => {
   res.render('notis');
@@ -149,25 +144,31 @@ app.post('/create', (req, res) => {
     return res.redirect('/login');
   }
 
-  const { post, mediaUrl, profileImageUrl} = req.body;
-  console.log("someones trying to post " + post)
+  const { post, mediaUrl, profileImageUrl } = req.body;
 
-
-  console.log("Post submitted: ", post);
-  console.log("Media URL: ", mediaUrl);
-
-  if(mediaUrl){
-    db.addPost(post, mediaUrl, profileImageUrl, null, null, req.session.user.username, null);
+  if (!post || post.trim() === '') {
+    return res.render('create', { error: 'Nothing to post!' });
   }
-  else{
-    if (!post || post.trim() == ' ') {
-      return res.render('create', { error: 'Nothing to post!' });
-    }
+
+  if (mediaUrl) {
+    db.addPost(post, mediaUrl, profileImageUrl, null, null, req.session.user.username, null);
+  } else {
     db.addPost(post, null, profileImageUrl, null, null, req.session.user.username, null);
   }
 
+  setTimeout(() => {
+    db.getMostRecentPost((err, recentPost) => {
+      if (err || !recentPost) {
+        console.error('Failed to get most recent post after adding');
+        return;
+      }
+      scheduleBotReply(recentPost.dweetID);
+    });
+  }, 100);
+
   res.redirect('/');
 });
+
 
 app.get("/post", (req, res) => {
   return res.redirect('/')
@@ -188,7 +189,7 @@ app.get('/post/:id', (req, res) => {
 
       replies.sort((a, b) => a.dweetID - b.dweetID);
 
-      console.log("Post:", post);
+      // console.log("Post:", post);
       res.render('post', { post, replies, user: req.session.user });
     });
   });
@@ -233,6 +234,69 @@ function hashPassword(password) {
 function comparePassword(password, hash) {
   return bcrypt.compare(password, hash);
 }
+
+//ai work
+function scheduleBotReply(originalPostId) {
+  const delayMs = Math.floor(Math.random() * (28000 - 8000 + 1)) + 8000;
+
+  setTimeout(async () => {
+    try {
+      db.getPost(originalPostId, async (err, post) => {
+        if (err || !post) {
+          console.error('Original post not found for bot reply');
+          return;
+        }
+
+        const randomNum = Math.floor(Math.random() * 6) + 1;
+        const botReply = await generateAIReply(post, randomNum);
+
+        const botUser = generateBotUsername();
+        const botProfileImageUrl = `https://github.com/identicons/${botUser.substring(0, 5)}.png`;
+        
+
+        db.addPost(
+          botReply,
+          null,
+          botProfileImageUrl,
+          null,
+          null,
+          botUser,
+          originalPostId,
+          (err) => {
+            if (err) {
+              console.error('Error saving bot reply:', err);
+            } else {
+              console.log('Bot replied to post WHAHAHAHAH', originalPostId);
+            }
+          }
+        );
+      });
+    } catch (e) {
+      console.error('Error generating bot reply:', e);
+    }
+  }, delayMs);
+}
+
+async function generateAIReply(post, who) {
+  return aipi.main(who, post);
+}
+
+function generateBotUsername() {
+  const adjectives = [
+    'Yummy', 'Happy', 'Silly', 'Brave', 'Clever', 'Witty', 'Zesty', 'Fuzzy', 'Sunny', 'Jolly'
+  ];
+
+  const nouns = [
+    'Tacos', 'Panda', 'Nuggets', 'Burrito', 'Pineapple', 'Pickle', 'Cupcake', 'Otter', 'Muffin', 'Koala'
+  ];
+
+  const randomAdj = adjectives[Math.floor(Math.random() * adjectives.length)];
+  const randomNoun = nouns[Math.floor(Math.random() * nouns.length)];
+  const randomNumber = Math.floor(1000 + Math.random() * 9000); // 4-digit number
+
+  return `${randomAdj}${randomNoun}${randomNumber}`;
+}
+
 
 // start server
 app.listen(PORT, () => {

@@ -29,4 +29,8 @@ async function main(character, text) {
   return(response.text)
 }
 
-main(6, "LeBron James is the GOAT");
+module.exports = {
+  main
+};
+
+// main(6, "LeBron James is the GOAT");

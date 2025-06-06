@@ -634,6 +634,29 @@ function getPostsByPoster(posterID, callback) {
   });
 }
 
+function getMostRecentPost(callback) {
+  const db = new sqlite3.Database('./dwitter.db', (err) => {
+    if (err) {
+      console.error('Error connecting to the database:', err.message);
+      return callback(err);
+    }
+
+    const sql = `SELECT * FROM dweetData ORDER BY dweetID DESC LIMIT 1`;
+
+    db.get(sql, [], (err, row) => {
+      db.close();
+
+      if (err) {
+        console.error('Database query error:', err.message);
+        return callback(err);
+      }
+      callback(null, row);
+    });
+  });
+}
+
+
+
 
 testerMethod();
 
@@ -661,5 +684,6 @@ module.exports = {
   getUser,
   getRecentPosts,
   getPostsByPoster,
-  getAllReplies
+  getAllReplies,
+  getMostRecentPost
 };

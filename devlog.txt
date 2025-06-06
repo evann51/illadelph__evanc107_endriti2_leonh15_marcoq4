@@ -76,3 +76,9 @@ evanC -- 2025-06-05 19:57
 evanC -- 2025-06-05 22:18
 	- media to posts
 	- pfps on posts
+
+evanC -- 2025-06-06 1:25
+	- replying to posts
+	- ai replying to posts
+	- ai names, pfps, storing in dbs
+
