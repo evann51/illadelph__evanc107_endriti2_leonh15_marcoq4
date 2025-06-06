@@ -115,7 +115,18 @@ app.get('/profile', (req, res) => {
     return res.redirect('/login');
   }
 
-  res.render('profile', { user: req.session.user });
+  posts = db.getPostsByPoster(req.session.user.userID, (err, pr) => {
+    if (err) {
+      console.error(err);
+      return res.render('home', { loggedIn: !!req.session.user, posts: [] });
+    }
+
+    if(pr){
+      res.render('profile', { user: req.session.user, pr});
+    }
+  })
+
+  res.render('profile', { user: req.session.user, posts: []});
 });
 
 app.get('/notis', (req, res) => {
