@@ -56,3 +56,19 @@ evanC -- 2025-05-28 00:40
 
 evanC -- 2025-06-03 00:08
 - fixed a database function and ejs file function -> login and sessions work now
+
+evanC -- 2025-06-05 19:57
+- creating!
+	- most recent 10 posts visible on home page
+	- posting allowed for logged in users
+- logging in
+	- log in works with async functions now
+	- issue with hashed passwords being stored wrongly with the cutting of userhandles
+	- using bcrypt instead of crypto
+- home details
+	- we are now all github identicons (generated based on username from github so we dont have to store so many images)
+	- put light/darkmode into settings icon
+	- profile png links to /profile
+- known issues
+	- light and dark mode changes are not consistent with various webpages
+	- styles and other html/css work needs to be consistentialized
