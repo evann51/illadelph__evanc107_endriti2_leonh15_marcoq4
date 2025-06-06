@@ -215,7 +215,14 @@
 
 
     <!-- main stuff -->
-
+	<div class="ml-64 px-4 mt-40">
+        <img 
+            src="https://github.com/identicons/<%= (user && user.username ? user.username.substring(0, 7) : 'guest') %>.png" 
+            alt="You" 
+            class="w-[100px] h-[100px] object-cover !invert-0 mx-auto -m-30"
+        />
+        <h2 class="text-center text-2xl font-semibold mb-6 text-gray-700 dark:text-gray-300"> <%= (user && user.username ? user.username.substring(0, 7) : 'guest') %></h2>
+	<div>
 
 
 
