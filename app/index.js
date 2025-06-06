@@ -30,8 +30,19 @@ app.use((req, res, next) => {
 
 //routes
 app.get('/', (req, res) => {
-  res.render('home', { loggedIn: !!req.session.user });
+  db.getRecentPosts((err, posts) => {
+    if (err) {
+      console.error(err);
+      return res.render('home', { loggedIn: !!req.session.user, posts: [] });
+    }
+
+    res.render('home', {
+      loggedIn: !!req.session.user,
+      posts
+    });
+  });
 });
+
 
 app.post('/', (req, res) => {
   res.render('home', { loggedIn: !!req.session.user });
@@ -71,10 +82,10 @@ app.post('/login', (req, res) => {
     if(err){
       return res.render('login', { error: 'Database error' });
     }
-    if(user) console.log('Hashed password from DB:', user.password);
-    console.log("yumyumyumyumyum " + password)
+    //if(user) console.log('Hashed password from DB:', user.password);
+    //console.log("yumyumyumyumyum " + password)
     if(!user || !(await comparePassword(password, user.password))){
-      console.log("burpburpburp")
+      //console.log("burpburpburp")
       return res.render('login', { error: 'Invalid credentials' });
     }
 
@@ -84,7 +95,7 @@ app.post('/login', (req, res) => {
       username: user.username,
       userHandle: user.userHandle,
     };
-    console.log("sucessfull loginnnnn");
+    //console.log("sucessfull loginnnnn");
     res.redirect('/');
   });
 });
@@ -107,6 +118,34 @@ app.get('/profile', (req, res) => {
 app.get('/notis', (req, res) => {
   res.render('notis');
 });
+
+app.get('/dm', (req, res) => {
+  res.render('dm');
+});
+
+app.get('/create', (req, res) => {
+  if (!req.session.user) {
+    return res.redirect('/login');
+  }
+  res.render('create');
+});
+
+app.post('/create', (req, res) => {
+  if (!req.session.user) {
+    return res.redirect('/login');
+  }
+
+  const { post } = req.body;
+  console.log("someones trying to post " + post)
+  if (!post || post.trim() == ' ') {
+    return res.render('create', { error: 'Nothing to post!' });
+  }
+
+  db.addPost(post, null, null, null, null, req.session.user.username, null);
+
+  res.redirect('/');
+});
+
 
 //helpies
 function hashPassword(password) {

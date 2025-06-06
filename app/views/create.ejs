@@ -94,7 +94,25 @@
             color: #000000;
         }
 
+        /* Light mode form background */
+        body.light-mode form#postForm {
+            background-color: #ececec;
+        }
+        
+        body.light-mode label[for="postContent"] {
+            color: #374151; /* gray-700 */
+        }
+
         /* Dark Mode */
+
+        body.dark-mode label[for="postContent"] {
+            color: #e5e7eb; /* gray-200 */
+        }
+
+        body.dark-mode form#postForm {
+            background-color: #242424;
+        }   
+
         body.dark-mode {
             background-color: #121212;
             color: #ffffff;
@@ -139,10 +157,11 @@
             color: white;
         }
         body.dark-mode textarea {
-            background-color: #ffffff;
-            color: white;
-            /* border: 1px solid #555; */
+            background-color: #575757; /* dark background */
+            color: #e2e8f0; /* light text */
+            border: 1px solid #4a5568; /* dark border */
         }
+
 
         
         /* Additional Styles for Validation */
@@ -189,8 +208,8 @@
             </ul>
         </div>
 
-        <div id="buttons" class="space-y-4">
-          <div class="relative">
+        <!-- <div id="buttons" class="space-y-4">
+          <div class="relative"> -->
             <!-- <button id="modeSwitcherBtn" class="w-full border border-black bg-blue-400 dark:bg-blue-400 text-black dark:text-white px-4 py-2 rounded-full hover:bg-blue-500 dark:hover:bg-blue-500">
                 Mode
             </button>
@@ -198,37 +217,60 @@
                 <a href="#" class="block px-4 py-2 hover:bg-gray-100 rounded-full" onclick="setMode('light')">Light</a>
                 <a href="#" class="block px-4 py-2 hover:bg-gray-100 rounded-full" onclick="setMode('dark')">Dark</a>
             </div> -->
-          </div>
-            <% if (user != null){ %>
-                <a href="/create" class="bg-blue-500 text-white px-4 py-2 rounded-full block text-center" style="color: white !important;">Create</a>
-            <% } else { %>
-                <a href="/login" class="bg-white border border-black text-black px-4 py-2 rounded-full hover:bg-gray-300 block text-center">Login</a>
-                <a href="/register" class="bg-white border border-black text-black px-4 py-2 rounded-full hover:bg-gray-300 block text-center">Register</a>
-            <% } %>
-
-        </div>
     </nav>
 
 
     <!-- main stuff -->
-    <div class="ml-64 px-4 mt-6">
-    <% if (posts && posts.length > 0) { %>
-        <section class="space-y-4">
-        <% posts.forEach(post => { %>
-            <div class="p-4 bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-lg shadow">
-            <div class="flex justify-between items-center mb-2">
-                <span class="font-semibold text-gray-800 dark:text-gray-200"><%= post.poster %></span>
-                <span class="text-xs text-gray-500 dark:text-gray-400">#<%= post.dweetID %></span>
-            </div>
-            <p class="text-gray-700 dark:text-gray-300 whitespace-pre-line break-words"><%= post.post %></p>
-            </div>
-        <% }) %>
-        </section>
-    <% } else { %>
-        <p class="text-gray-500 dark:text-gray-400">No posts yet.</p>
-    <% } %>
+    <div class="flex justify-center items-start px-4 pt-20" style="margin-left: 16rem; height: 100vh;">
+    <form
+        id="postForm" action="/create" method="POST" class="max-w-2xl w-full p-6 rounded-lg shadow-md">
+        <label for="postContent" class="block text-gray-700 dark:text-gray-200 font-semibold mb-2">
+        What's happening?
+        </label>
+        <textarea
+        id="postContent"
+        name="post"
+        rows="4"
+        maxlength="280"
+        placeholder="Write here..."
+        class="w-full p-3 rounded-md border border-gray-300 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 text-gray-900 dark:text-gray-100 resize-none focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
+        required
+        ></textarea>
+
+        <div class="flex justify-between items-center mt-4">
+        <span
+            id="charCount"
+            class="text-sm text-gray-500 dark:text-gray-400"
+            >0 / 280</span
+        >
+        <button
+            type="submit"
+            class="bg-blue-500 hover:bg-blue-600 text-white font-semibold px-4 py-2 rounded-full transition"
+        >
+            Post
+        </button>
+        </div>
+    </form>
     </div>
 
+
+
+
+
+    <script>
+    const textarea = document.getElementById('postContent');
+    const charCount = document.getElementById('charCount');
+
+    textarea.addEventListener('input', () => {
+        const currentLength = textarea.value.length;
+        charCount.textContent = `${currentLength} / 280`;
+        if (currentLength > 280) {
+        charCount.classList.add('text-red-600');
+        } else {
+        charCount.classList.remove('text-red-600');
+        }
+    });
+    </script>
 
 
 
